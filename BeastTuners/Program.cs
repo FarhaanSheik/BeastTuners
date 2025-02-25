@@ -1,4 +1,12 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using BeastTuners.Data;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("BeastTunersContextConnection") ?? throw new InvalidOperationException("Connection string 'BeastTunersContextConnection' not found.");
+
+builder.Services.AddDbContext<BeastTunersContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<BeastTunersUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BeastTunersContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
