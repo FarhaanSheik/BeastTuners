@@ -1,0 +1,47 @@
+﻿@model IEnumerable<BeastTuners.Models.SuppliersDelivery>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supplier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Part)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Supplier.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Part.Category)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SupplierDeliveryID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SupplierDeliveryID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SupplierDeliveryID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
