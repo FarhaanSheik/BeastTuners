@@ -59,7 +59,7 @@ namespace BeastTuners.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EmployeeRoleID,EmployeeID,Role")] EmployeeRole employeeRole)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _context.Add(employeeRole);
                 await _context.SaveChangesAsync();
@@ -98,7 +98,7 @@ namespace BeastTuners.Controllers
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {
