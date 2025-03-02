@@ -61,7 +61,7 @@ namespace BeastTuners.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("SupplierDeliveryID,SupplierID,PartID,DeliveryTime")] SuppliersDelivery suppliersDelivery)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(suppliersDelivery);
                 await _context.SaveChangesAsync();
@@ -102,7 +102,7 @@ namespace BeastTuners.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
