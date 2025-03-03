@@ -22,7 +22,29 @@ namespace BeastTuners.Controllers
         // GET: Parts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Part.ToListAsync());
+            var parts = await _context.Part.ToListAsync();
+            return View(parts);
+        }
+
+        // GET: Parts/Category/{category}
+        public async Task<IActionResult> Category(string category)
+        {
+            if (string.IsNullOrEmpty(category))
+            {
+                return NotFound();
+            }
+
+            var parts = await _context.Part
+                .Where(p => p.Category == category)
+                .ToListAsync();
+
+            if (!parts.Any())
+            {
+                return NotFound($"No parts found in category: {category}");
+            }
+
+            ViewData["Category"] = category;
+            return View(parts);
         }
 
         // GET: Parts/Details/5

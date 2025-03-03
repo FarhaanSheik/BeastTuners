@@ -2,7 +2,83 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mt-5">
+    <h1 class="display-3 font-weight-bold text-primary">Welcome to Beast Tuners</h1>
+    <p class="lead text-secondary">Your ultimate solution for car parts inventory management.</p>
+
+    <div class="container">
+        <div class="row mt-4">
+            <!-- Engine -->
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm">
+                    <a asp-controller="Parts" asp-action="Category" asp-route-category="Engine">
+                        <img src="~/images/engine.jpg" class="card-img-top img-fluid part-image" alt="Engine">
+                    </a>
+                    <div class="card-body text-center">
+                        <a asp-controller="Parts" asp-action="Category" asp-route-category="Engine" class="btn btn-primary">Engine Parts</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Brakes -->
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm">
+                    <a asp-controller="Parts" asp-action="Category" asp-route-category="Brakes">
+                        <img src="~/images/brakes.jpg" class="card-img-top img-fluid part-image" alt="Brakes">
+                    </a>
+                    <div class="card-body text-center">
+                        <a asp-controller="Parts" asp-action="Category" asp-route-category="Brakes" class="btn btn-primary">Brake Parts</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Wheels -->
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm">
+                    <a asp-controller="Parts" asp-action="Category" asp-route-category="Wheels">
+                        <img src="~/images/wheels.jpg" class="card-img-top img-fluid part-image" alt="Wheels">
+                    </a>
+                    <div class="card-body text-center">
+                        <a asp-controller="Parts" asp-action="Category" asp-route-category="Wheels" class="btn btn-primary">Wheel Parts</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Exhaust -->
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm">
+                    <a asp-controller="Parts" asp-action="Category" asp-route-category="Exhaust">
+                        <img src="~/images/exhaust.jpg" class="card-img-top img-fluid part-image" alt="Exhaust">
+                    </a>
+                    <div class="card-body text-center">
+                        <a asp-controller="Parts" asp-action="Category" asp-route-category="Exhaust" class="btn btn-primary">Exhaust Parts</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Suspension -->
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm">
+                    <a asp-controller="Parts" asp-action="Category" asp-route-category="Suspension">
+                        <img src="~/images/suspension.jpg" class="card-img-top img-fluid part-image" alt="Suspension">
+                    </a>
+                    <div class="card-body text-center">
+                        <a asp-controller="Parts" asp-action="Category" asp-route-category="Suspension" class="btn btn-primary">Suspension Parts</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Interior -->
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm">
+                    <a asp-controller="Parts" asp-action="Category" asp-route-category="Interior">
+                        <img src="~/images/interior.jpg" class="card-img-top img-fluid part-image" alt="Interior">
+                    </a>
+                    <div class="card-body text-center">
+                        <a asp-controller="Parts" asp-action="Category" asp-route-category="Interior" class="btn btn-primary">Interior Parts</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5 w-50 mx-auto">
+    <p class="mt-4 text-muted">
+        Learn about <a href="https://learn.microsoft.com/aspnet/core" class="text-info font-weight-bold" target="_blank">building Web apps with ASP.NET Core</a>.
+    </p>
 </div>

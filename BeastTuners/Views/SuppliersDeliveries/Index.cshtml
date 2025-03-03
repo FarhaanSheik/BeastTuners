@@ -1,47 +1,37 @@
 ﻿@model IEnumerable<BeastTuners.Models.SuppliersDelivery>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Suppliers Delivery";
 }
 
-<h1>Index</h1>
+<h1>Suppliers Delivery</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-success">Create New Delivery</a>
+</div>
+
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DeliveryTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Supplier)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Part)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.DeliveryTime)</th>
+            <th>@Html.DisplayNameFor(model => model.Supplier)</th>
+            <th>@Html.DisplayNameFor(model => model.Part)</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeliveryTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Supplier.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Part.Category)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.SupplierDeliveryID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.SupplierDeliveryID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.SupplierDeliveryID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.DeliveryTime)</td>
+                <td>@Html.DisplayFor(modelItem => item.Supplier.SupplierName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Part.PartName)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.SupplierDeliveryID" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.SupplierDeliveryID" class="btn btn-info btn-sm">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.SupplierDeliveryID" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
