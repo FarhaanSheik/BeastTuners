@@ -18,13 +18,18 @@ namespace BeastTuners.Controllers
         {
             _context = context;
         }
-
-        // GET: Parts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var parts = await _context.Part.ToListAsync();
-            return View(parts);
+            var parts = _context.Part.AsQueryable(); // Ensure it's IQueryable for filtering
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                parts = parts.Where(p => p.PartName.Contains(searchString) || p.Category.Contains(searchString));
+            }
+
+            return View(await parts.ToListAsync());
         }
+
 
         // GET: Parts/Category/{category}
         public async Task<IActionResult> Category(string category)

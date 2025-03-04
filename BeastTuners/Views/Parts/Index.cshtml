@@ -1,10 +1,19 @@
 ﻿@model IEnumerable<BeastTuners.Models.Part>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Parts Inventory";
 }
 
 <h1>Parts Inventory</h1>
+
+<!-- Search Form -->
+<form asp-action="Index" method="get" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="searchString" class="form-control" placeholder="Search parts..." value="@Context.Request.Query["searchString"]">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
 
 <div class="mb-3">
     <a asp-controller="Parts" asp-action="Create" class="btn btn-success">Create New Part</a>
@@ -37,4 +46,3 @@
         }
     </tbody>
 </table>
-
