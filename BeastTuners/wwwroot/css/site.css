@@ -53,3 +53,12 @@ body {
     width: 100%; /* Make buttons full width */
     font-weight: bold;
 }
+.btn-search {
+    width: 80px !important; /* Adjust width to desired length */
+    min-width: 80px !important; /* Ensures it doesn’t expand */
+    padding: 6px 10px !important; /* Keeps button proportional */
+    font-size: 14px !important; /* Keeps text readable */
+    text-align: center; /* Centers text */
+}
+
+

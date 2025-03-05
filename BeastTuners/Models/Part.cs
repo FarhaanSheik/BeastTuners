@@ -20,6 +20,13 @@ namespace BeastTuners.Models
         public decimal Price { get; set; }
 
         [Required]
+        [StringLength(500, ErrorMessage = "Description cannot exceed 500 characters.")]
+        public string Description { get; set; }
+
+        public string? ImagePath { get; set; }
+
+
+        [Required]
         [Range(0, int.MaxValue)]
         public int StockQuantity { get; set; }
     }

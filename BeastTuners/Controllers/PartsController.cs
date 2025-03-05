@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,23 +16,30 @@ namespace BeastTuners.Controllers
     public class PartsController : Controller
     {
         private readonly BeastTunersContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public PartsController(BeastTunersContext context)
+        public PartsController(BeastTunersContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
-        public async Task<IActionResult> Index(string searchString)
+
+        public async Task<IActionResult> Index(string searchString, string categoryFilter)
         {
-            var parts = _context.Part.AsQueryable(); // Ensure it's IQueryable for filtering
+            var parts = _context.Part.AsQueryable();
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                parts = parts.Where(p => p.PartName.Contains(searchString) || p.Category.Contains(searchString));
+                parts = parts.Where(p => p.PartName.Contains(searchString));
+            }
+
+            if (!string.IsNullOrEmpty(categoryFilter))
+            {
+                parts = parts.Where(p => p.Category == categoryFilter);
             }
 
             return View(await parts.ToListAsync());
         }
-
 
         // GET: Parts/Category/{category}
         public async Task<IActionResult> Category(string category)
@@ -77,14 +87,26 @@ namespace BeastTuners.Controllers
         }
 
         // POST: Parts/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PartID,PartName,Category,Price,StockQuantity")] Part part)
+        public async Task<IActionResult> Create([Bind("PartID,PartName,Category,Price,StockQuantity,Description")] Part part, IFormFile ImageFile)
         {
             if (ModelState.IsValid)
             {
+                if (ImageFile != null && ImageFile.Length > 0)
+                {
+                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + ImageFile.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await ImageFile.CopyToAsync(fileStream);
+                    }
+
+                    part.ImagePath = "/images/" + uniqueFileName; // Store relative path
+                }
+
                 _context.Add(part);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -109,11 +131,9 @@ namespace BeastTuners.Controllers
         }
 
         // POST: Parts/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PartID,PartName,Category,Price,StockQuantity")] Part part)
+        public async Task<IActionResult> Edit(int id, [Bind("PartID,PartName,Category,Price,StockQuantity,Description,ImagePath")] Part part, IFormFile ImageFile)
         {
             if (id != part.PartID)
             {
@@ -124,6 +144,21 @@ namespace BeastTuners.Controllers
             {
                 try
                 {
+                    // Check if new image is uploaded
+                    if (ImageFile != null && ImageFile.Length > 0)
+                    {
+                        string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                        string uniqueFileName = Guid.NewGuid().ToString() + "_" + ImageFile.FileName;
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await ImageFile.CopyToAsync(fileStream);
+                        }
+
+                        part.ImagePath = "/images/" + uniqueFileName; // Save new image path
+                    }
+
                     _context.Update(part);
                     await _context.SaveChangesAsync();
                 }
@@ -142,6 +177,7 @@ namespace BeastTuners.Controllers
             }
             return View(part);
         }
+
 
         // GET: Parts/Delete/5
         public async Task<IActionResult> Delete(int? id)
