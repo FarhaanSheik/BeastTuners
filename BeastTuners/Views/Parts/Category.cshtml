@@ -12,20 +12,33 @@
             <th>@Html.DisplayNameFor(model => model.PartName)</th>
             <th>@Html.DisplayNameFor(model => model.Price)</th>
             <th>@Html.DisplayNameFor(model => model.StockQuantity)</th>
+            <th>Image</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var part in Model)
+        @foreach (var item in Model)
         {
             <tr>
-                <td>@part.PartName</td>
-                <td>@part.Price</td>
-                <td>@part.StockQuantity</td>
+                <td>@Html.DisplayFor(modelItem => item.PartName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td>@Html.DisplayFor(modelItem => item.StockQuantity)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@part.PartID" class="btn btn-info">Details</a>
-                    <a asp-action="Edit" asp-route-id="@part.PartID" class="btn btn-warning">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@part.PartID" class="btn btn-danger">Delete</a>
+                    @if (!string.IsNullOrEmpty(item.ImagePath))
+                    {
+                        <img src="@item.ImagePath" alt="Part Image" style="width: 80px; height: auto;" />
+                    }
+                    else
+                    {
+                        <span>No Image</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PartID" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.PartID" class="btn btn-info btn-sm">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.PartID" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>
         }
