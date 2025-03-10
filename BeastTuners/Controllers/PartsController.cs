@@ -17,11 +17,13 @@ namespace BeastTuners.Controllers
     {
         private readonly BeastTunersContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly CartService _cartService;
 
-        public PartsController(BeastTunersContext context, IWebHostEnvironment webHostEnvironment)
+        public PartsController(BeastTunersContext context, IWebHostEnvironment webHostEnvironment, CartService cartService)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _cartService = cartService;
         }
 
         public async Task<IActionResult> Index(string searchString, string categoryFilter)
@@ -178,7 +180,6 @@ namespace BeastTuners.Controllers
             return View(part);
         }
 
-
         // GET: Parts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -216,5 +217,51 @@ namespace BeastTuners.Controllers
         {
             return _context.Part.Any(e => e.PartID == id);
         }
+
+        // CART FUNCTIONALITY 
+
+        public IActionResult AddToCart(int id, string returnUrl)
+        {
+            var part = _context.Part.Find(id);
+            if (part == null) return NotFound();
+
+            var cartItem = new CartItem
+            {
+                PartID = part.PartID,
+                PartName = part.PartName,
+                Price = part.Price,
+                Quantity = 1,
+                ImagePath = part.ImagePath
+            };
+
+            _cartService.AddToCart(cartItem);
+
+       
+            if (!string.IsNullOrEmpty(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+
+            return RedirectToAction("Index"); // Default: Go back to Parts Table if no returnUrl is provided
+        }
+
+        public IActionResult Cart()
+        {
+            var cartItems = _cartService.GetCart();
+            return View(cartItems);
+        }
+
+        public IActionResult RemoveFromCart(int id)
+        {
+            _cartService.RemoveFromCart(id);
+            return RedirectToAction("Cart");
+        }
+
+        public IActionResult ClearCart()
+        {
+            _cartService.ClearCart();
+            return RedirectToAction("Cart");
+        }
+
     }
 }

@@ -9,6 +9,11 @@ builder.Services.AddDbContext<BeastTunersContext>(options => options.UseSqlServe
 
 builder.Services.AddDefaultIdentity<BeastTunersUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BeastTunersContext>();
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<CartService>(); // Register Cart Service
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -24,6 +29,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseSession(); // Enable session
 
 app.UseRouting();
 
