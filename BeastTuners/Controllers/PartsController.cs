@@ -43,7 +43,6 @@ namespace BeastTuners.Controllers
             return View(await parts.ToListAsync());
         }
 
-        // GET: Parts/Category/{category}
         public async Task<IActionResult> Category(string category)
         {
             if (string.IsNullOrEmpty(category))
@@ -64,7 +63,6 @@ namespace BeastTuners.Controllers
             return View(parts);
         }
 
-        // GET: Parts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -82,13 +80,11 @@ namespace BeastTuners.Controllers
             return View(part);
         }
 
-        // GET: Parts/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Parts/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PartID,PartName,Category,Price,StockQuantity,Description")] Part part, IFormFile ImageFile)
@@ -106,7 +102,7 @@ namespace BeastTuners.Controllers
                         await ImageFile.CopyToAsync(fileStream);
                     }
 
-                    part.ImagePath = "/images/" + uniqueFileName; // Store relative path
+                    part.ImagePath = "/images/" + uniqueFileName;
                 }
 
                 _context.Add(part);
@@ -116,7 +112,6 @@ namespace BeastTuners.Controllers
             return View(part);
         }
 
-        // GET: Parts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -132,7 +127,6 @@ namespace BeastTuners.Controllers
             return View(part);
         }
 
-        // POST: Parts/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PartID,PartName,Category,Price,StockQuantity,Description,ImagePath")] Part part, IFormFile ImageFile)
@@ -146,7 +140,6 @@ namespace BeastTuners.Controllers
             {
                 try
                 {
-                    // Check if new image is uploaded
                     if (ImageFile != null && ImageFile.Length > 0)
                     {
                         string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
@@ -158,7 +151,7 @@ namespace BeastTuners.Controllers
                             await ImageFile.CopyToAsync(fileStream);
                         }
 
-                        part.ImagePath = "/images/" + uniqueFileName; // Save new image path
+                        part.ImagePath = "/images/" + uniqueFileName;
                     }
 
                     _context.Update(part);
@@ -180,7 +173,6 @@ namespace BeastTuners.Controllers
             return View(part);
         }
 
-        // GET: Parts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -198,7 +190,6 @@ namespace BeastTuners.Controllers
             return View(part);
         }
 
-        // POST: Parts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -218,9 +209,9 @@ namespace BeastTuners.Controllers
             return _context.Part.Any(e => e.PartID == id);
         }
 
-        // CART FUNCTIONALITY 
-
-        public IActionResult AddToCart(int id, string returnUrl)
+        // Updated AddToCart Method
+        [HttpPost]
+        public IActionResult AddToCart(int id, int quantity = 1, string returnUrl = null)
         {
             var part = _context.Part.Find(id);
             if (part == null) return NotFound();
@@ -230,19 +221,15 @@ namespace BeastTuners.Controllers
                 PartID = part.PartID,
                 PartName = part.PartName,
                 Price = part.Price,
-                Quantity = 1,
+                Quantity = quantity,  // Ensure correct quantity is stored
                 ImagePath = part.ImagePath
             };
 
             _cartService.AddToCart(cartItem);
 
-       
-            if (!string.IsNullOrEmpty(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
+            TempData["CartMessage"] = $"{part.PartName} (x{quantity}) added to cart!";
 
-            return RedirectToAction("Index"); // Default: Go back to Parts Table if no returnUrl is provided
+            return !string.IsNullOrEmpty(returnUrl) ? Redirect(returnUrl) : Redirect(Request.Headers["Referer"].ToString());
         }
 
         public IActionResult Cart()
@@ -263,5 +250,19 @@ namespace BeastTuners.Controllers
             return RedirectToAction("Cart");
         }
 
+        [HttpPost]
+        public IActionResult UpdateCart(int id, int quantity)
+        {
+            if (quantity < 1)
+            {
+                _cartService.RemoveFromCart(id);
+            }
+            else
+            {
+                _cartService.UpdateCart(id, quantity);
+            }
+
+            return RedirectToAction("Cart");
+        }
     }
 }

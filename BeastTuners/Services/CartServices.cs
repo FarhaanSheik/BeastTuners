@@ -24,21 +24,56 @@ public class CartService
     {
         var cart = GetCart();
         var existingItem = cart.Find(c => c.PartID == item.PartID);
+
         if (existingItem != null)
         {
-            existingItem.Quantity += item.Quantity;
+            existingItem.Quantity += item.Quantity;  //Increase quantity if item exists
         }
         else
         {
             cart.Add(item);
         }
+
+        SaveCart(cart);
+    }
+
+    public void UpdateCart(int partID, int quantity)
+    {
+        var cart = GetCart();
+        var item = cart.Find(c => c.PartID == partID);
+
+        if (item != null)
+        {
+            if (quantity > 0)
+            {
+                item.Quantity = quantity;  //Update quantity
+            }
+            else
+            {
+                cart.Remove(item); //Remove item if quantity is 0
+            }
+        }
+
         SaveCart(cart);
     }
 
     public void RemoveFromCart(int partId)
     {
         var cart = GetCart();
-        cart.RemoveAll(c => c.PartID == partId);
+        var item = cart.Find(c => c.PartID == partId);
+
+        if (item != null)
+        {
+            if (item.Quantity > 1)
+            {
+                item.Quantity--;  //Decrease quantity instead of removing
+            }
+            else
+            {
+                cart.Remove(item); //Remove item if quantity reaches 0
+            }
+        }
+
         SaveCart(cart);
     }
 

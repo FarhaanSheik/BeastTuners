@@ -10,7 +10,6 @@
 <form asp-action="Index" method="get" class="mb-3">
     <div class="input-group">
         <input type="text" name="searchString" class="form-control" placeholder="Search by name..." value="@Context.Request.Query["searchString"]">
-
         <select name="categoryFilter" class="form-select">
             <option value="">All Categories</option>
             <option value="Engine">Engine</option>
@@ -20,17 +19,11 @@
             <option value="Interior">Interior</option>
             <option value="Exhaust">Exhaust</option>
             <option value="Exterior">Exterior</option>
-            <!-- Add more categories here -->
         </select>
-
         <button type="submit" class="btn btn-primary btn-search">🔍 Search</button>
         <a asp-action="Index" class="btn btn-outline-secondary">❌ Clear</a>
-       
-
     </div>
 </form>
-
-
 
 <div class="mb-3">
     <a asp-controller="Parts" asp-action="Create" class="btn btn-success">Create New Part</a>
@@ -71,10 +64,22 @@
                     <a asp-action="Edit" asp-route-id="@item.PartID" class="btn btn-warning btn-sm">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.PartID" class="btn btn-info btn-sm">Details</a>
                     <a asp-action="Delete" asp-route-id="@item.PartID" class="btn btn-danger btn-sm">Delete</a>
-                    <a asp-action="AddToCart" asp-route-id="@item.PartID" asp-route-returnUrl="@Context.Request.Path" class="btn btn-success btn-sm">🛒 Add to Cart</a>
 
+                    
+                    <form asp-action="AddToCart" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@item.PartID" />
+                        <input type="number" name="quantity" value="1" min="1" class="form-control d-inline w-25" />
+                        <button type="submit" class="btn btn-success btn-sm">🛒 Add to Cart</button>
+                    </form>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+@if (TempData["CartMessage"] != null)
+{
+    <div class="alert alert-success mt-3">
+        @TempData["CartMessage"]
+    </div>
+}

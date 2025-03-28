@@ -73,19 +73,19 @@ namespace BeastTuners.Areas.Identity.Pages.Account
         {
             [Required]
             [MaxLength(50)]
-            [Display(Name = "FisrtName")]
+            [Display(Name = "Fisrt Name")]
             public string FirstName { get; set; }
 
 
             [Required]
             [MaxLength(50)]
-            [Display(Name = "LastName")]
+            [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
 
             [Required]
             [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be exactly 10 digits.")]
-            [Display(Name = "PhoneNumber")]
+            [Display(Name = "Phone Number")]
             public string PhoneNumber { get; set; }
 
             [Required(ErrorMessage = "Address is required.")]

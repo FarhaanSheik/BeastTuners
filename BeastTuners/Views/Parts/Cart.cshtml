@@ -35,8 +35,15 @@ else
                     <td>@item.Quantity</td>
                     <td>@(item.Price * item.Quantity)</td>
                     <td>
-                        <a asp-action="RemoveFromCart" asp-route-id="@item.PartID" class="btn btn-danger btn-sm">❌ Remove</a>
-                    </td>
+                        <form asp-action="UpdateCart" method="post">
+                            <input type="hidden" name="id" value="@item.PartID" />
+                            <input type="number" name="quantity" value="@item.Quantity" min="1" class="form-control d-inline" style="width: 60px;" />
+                            <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                        </form>
+                        <form asp-action="RemoveFromCart" method="post" style="margin-top: 5px;">
+                            <input type="hidden" name="id" value="@item.PartID" />
+                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                        </form>
                 </tr>
             }
         </tbody>
