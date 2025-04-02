@@ -2,6 +2,12 @@
 
 namespace BeastTuners.Models
 {
+    public enum Role
+    {
+        Manager,
+        Staff,
+        Receptionist,
+    }
     public class Employee
     {
         [Key]
@@ -23,5 +29,9 @@ namespace BeastTuners.Models
         [Required]
         [DataType(DataType.Date)]
         public DateTime HireDate { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string Role { get; set; }
     }
 }
