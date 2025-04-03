@@ -22,6 +22,8 @@ namespace BeastTuners.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
+
+            ViewData["Roles"] = new SelectList(_context.Roles);
             return View(await _context.Employee.ToListAsync());
         }
 

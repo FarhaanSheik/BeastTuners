@@ -32,6 +32,6 @@ namespace BeastTuners.Models
 
         [Required]
         [StringLength(50)]
-        public string Role { get; set; }
+        public Role Role { get; set; }
     }
 }
