@@ -49,8 +49,8 @@ namespace BeastTuners.Controllers
         // GET: PartSuppliers/Create
         public IActionResult Create()
         {
-            ViewData["PartID"] = new SelectList(_context.Part, "PartID", "Category");
-            ViewData["SupplierID"] = new SelectList(_context.Set<Supplier>(), "SupplierID", "Address");
+            ViewData["PartID"] = new SelectList(_context.Part, "PartID", "PartName");
+            ViewData["SupplierID"] = new SelectList(_context.Set<Supplier>(), "SupplierID", "SupplierName");
             return View();
         }
 
@@ -61,14 +61,14 @@ namespace BeastTuners.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PartSuppliersID,PartID,SupplierID")] PartSupplier partSupplier)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(partSupplier);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PartID"] = new SelectList(_context.Part, "PartID", "Category", partSupplier.PartID);
-            ViewData["SupplierID"] = new SelectList(_context.Set<Supplier>(), "SupplierID", "Address", partSupplier.SupplierID);
+            ViewData["PartID"] = new SelectList(_context.Part, "PartID", "PartName", partSupplier.PartID);
+            ViewData["SupplierID"] = new SelectList(_context.Set<Supplier>(), "SupplierID", "SupplierName", partSupplier.SupplierID);
             return View(partSupplier);
         }
 
@@ -85,8 +85,8 @@ namespace BeastTuners.Controllers
             {
                 return NotFound();
             }
-            ViewData["PartID"] = new SelectList(_context.Part, "PartID", "Category", partSupplier.PartID);
-            ViewData["SupplierID"] = new SelectList(_context.Set<Supplier>(), "SupplierID", "Address", partSupplier.SupplierID);
+            ViewData["PartID"] = new SelectList(_context.Part, "PartID", "PartName", partSupplier.PartID);
+            ViewData["SupplierID"] = new SelectList(_context.Set<Supplier>(), "SupplierID", "SupplierName", partSupplier.SupplierID);
             return View(partSupplier);
         }
 
@@ -102,7 +102,7 @@ namespace BeastTuners.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
@@ -122,8 +122,8 @@ namespace BeastTuners.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PartID"] = new SelectList(_context.Part, "PartID", "Category", partSupplier.PartID);
-            ViewData["SupplierID"] = new SelectList(_context.Set<Supplier>(), "SupplierID", "Address", partSupplier.SupplierID);
+            ViewData["PartID"] = new SelectList(_context.Part, "PartID", "PartName", partSupplier.PartID);
+            ViewData["SupplierID"] = new SelectList(_context.Set<Supplier>(), "SupplierID", "SupplierName", partSupplier.SupplierID);
             return View(partSupplier);
         }
 
