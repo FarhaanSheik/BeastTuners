@@ -22,6 +22,8 @@ namespace BeastTuners.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
+
+            ViewData["Roles"] = new SelectList(_context.Roles);
             return View(await _context.Employee.ToListAsync());
         }
 
@@ -54,7 +56,7 @@ namespace BeastTuners.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployeeID,FirstName,LastName,PhoneNumber,HireDate")] Employee employee)
+        public async Task<IActionResult> Create([Bind("EmployeeID,FirstName,LastName,PhoneNumber,HireDate,Role")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +88,7 @@ namespace BeastTuners.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EmployeeID,FirstName,LastName,PhoneNumber,HireDate")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("EmployeeID,FirstName,LastName,PhoneNumber,HireDate,Role")] Employee employee)
         {
             if (id != employee.EmployeeID)
             {

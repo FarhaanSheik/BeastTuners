@@ -4,6 +4,7 @@ using BeastTuners.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeastTuners.Migrations
 {
     [DbContext(typeof(BeastTunersContext))]
-    partial class BeastTunersContextModelSnapshot : ModelSnapshot
+    [Migration("20250401205229_roleEnum")]
+    partial class roleEnum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -540,13 +543,13 @@ namespace BeastTuners.Migrations
             modelBuilder.Entity("BeastTuners.Models.PartSupplier", b =>
                 {
                     b.HasOne("BeastTuners.Models.Part", "Part")
-                        .WithMany("PartSuppliers")
+                        .WithMany()
                         .HasForeignKey("PartID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BeastTuners.Models.Supplier", "Supplier")
-                        .WithMany("PartSuppliers")
+                        .WithMany()
                         .HasForeignKey("SupplierID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -624,16 +627,6 @@ namespace BeastTuners.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BeastTuners.Models.Part", b =>
-                {
-                    b.Navigation("PartSuppliers");
-                });
-
-            modelBuilder.Entity("BeastTuners.Models.Supplier", b =>
-                {
-                    b.Navigation("PartSuppliers");
                 });
 #pragma warning restore 612, 618
         }

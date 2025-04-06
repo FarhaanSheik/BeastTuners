@@ -25,8 +25,6 @@ public DbSet<BeastTuners.Models.Customer> Customer { get; set; } = default!;
 
 public DbSet<BeastTuners.Models.Employee> Employee { get; set; } = default!;
 
-public DbSet<BeastTuners.Models.EmployeeRole> EmployeeRole { get; set; } = default!;
-
 public DbSet<BeastTuners.Models.InventoryAdjustment> InventoryAdjustment { get; set; } = default!;
 
 public DbSet<BeastTuners.Models.OrderDetail> OrderDetail { get; set; } = default!;

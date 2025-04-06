@@ -29,5 +29,10 @@ namespace BeastTuners.Models
         [Required]
         [Range(0, int.MaxValue)]
         public int StockQuantity { get; set; }
+
+
+
+
+        public ICollection<PartSupplier> PartSuppliers { get; set; }
     }
 }

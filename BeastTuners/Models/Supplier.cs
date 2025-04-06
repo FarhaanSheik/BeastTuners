@@ -19,5 +19,7 @@ namespace BeastTuners.Models
         [Required]
         [StringLength(200)]
         public string Address { get; set; }
+
+        public ICollection<PartSupplier> PartSuppliers { get; set; }
     }
 }
