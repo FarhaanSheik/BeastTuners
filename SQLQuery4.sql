@@ -1,0 +1,2 @@
+﻿SELECT * FROM Part 
+ORDER BY Price DESC;

@@ -1,0 +1,1 @@
+﻿SELECT * FROM Part WHERE Category = 'Exterior';

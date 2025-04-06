@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeastTuners.Migrations
 {
     [DbContext(typeof(BeastTunersContext))]
-    [Migration("20250304223445_Updatedmodels")]
-    partial class Updatedmodels
+    [Migration("20250406232754_addedrole")]
+    partial class addedrole
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -147,32 +147,13 @@ namespace BeastTuners.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("EmployeeID");
 
                     b.ToTable("Employee");
-                });
-
-            modelBuilder.Entity("BeastTuners.Models.EmployeeRole", b =>
-                {
-                    b.Property<int>("EmployeeRoleID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeRoleID"));
-
-                    b.Property<int>("EmployeeID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("EmployeeRoleID");
-
-                    b.HasIndex("EmployeeID");
-
-                    b.ToTable("EmployeeRole");
                 });
 
             modelBuilder.Entity("BeastTuners.Models.InventoryAdjustment", b =>
@@ -517,17 +498,6 @@ namespace BeastTuners.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BeastTuners.Models.EmployeeRole", b =>
-                {
-                    b.HasOne("BeastTuners.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
             modelBuilder.Entity("BeastTuners.Models.InventoryAdjustment", b =>
                 {
                     b.HasOne("BeastTuners.Models.Part", "Part")
@@ -572,13 +542,13 @@ namespace BeastTuners.Migrations
             modelBuilder.Entity("BeastTuners.Models.PartSupplier", b =>
                 {
                     b.HasOne("BeastTuners.Models.Part", "Part")
-                        .WithMany()
+                        .WithMany("PartSuppliers")
                         .HasForeignKey("PartID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BeastTuners.Models.Supplier", "Supplier")
-                        .WithMany()
+                        .WithMany("PartSuppliers")
                         .HasForeignKey("SupplierID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -656,6 +626,16 @@ namespace BeastTuners.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BeastTuners.Models.Part", b =>
+                {
+                    b.Navigation("PartSuppliers");
+                });
+
+            modelBuilder.Entity("BeastTuners.Models.Supplier", b =>
+                {
+                    b.Navigation("PartSuppliers");
                 });
 #pragma warning restore 612, 618
         }

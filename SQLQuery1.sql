@@ -1,1 +1,2 @@
-﻿Select P.Name 
+﻿SELECT * FROM Part
+;

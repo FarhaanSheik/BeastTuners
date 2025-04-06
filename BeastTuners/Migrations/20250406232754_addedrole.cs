@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BeastTuners.Migrations
 {
     /// <inheritdoc />
-    public partial class BaseDone : Migration
+    public partial class addedrole : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -75,7 +75,8 @@ namespace BeastTuners.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HireDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    HireDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -91,6 +92,8 @@ namespace BeastTuners.Migrations
                     PartName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Category = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StockQuantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -242,26 +245,6 @@ namespace BeastTuners.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmployeeRole",
-                columns: table => new
-                {
-                    EmployeeRoleID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeID = table.Column<int>(type: "int", nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EmployeeRole", x => x.EmployeeRoleID);
-                    table.ForeignKey(
-                        name: "FK_EmployeeRole_Employee_EmployeeID",
-                        column: x => x.EmployeeID,
-                        principalTable: "Employee",
-                        principalColumn: "EmployeeID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "InventoryAdjustment",
                 columns: table => new
                 {
@@ -405,11 +388,6 @@ namespace BeastTuners.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeRole_EmployeeID",
-                table: "EmployeeRole",
-                column: "EmployeeID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_InventoryAdjustment_PartID",
                 table: "InventoryAdjustment",
                 column: "PartID");
@@ -469,7 +447,7 @@ namespace BeastTuners.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "EmployeeRole");
+                name: "Employee");
 
             migrationBuilder.DropTable(
                 name: "InventoryAdjustment");
@@ -488,9 +466,6 @@ namespace BeastTuners.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Employee");
 
             migrationBuilder.DropTable(
                 name: "OrderResult");
