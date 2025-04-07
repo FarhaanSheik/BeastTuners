@@ -7,6 +7,7 @@ namespace BeastTuners.Models
         Manager,
         Staff,
         Receptionist,
+        Customer,
     }
     public class Employee
     {
@@ -32,6 +33,6 @@ namespace BeastTuners.Models
 
         [Required]
         
-        public string Role { get; set; }
+        public Role Role { get; set; }
     }
 }

@@ -25,6 +25,7 @@ namespace BeastTuners.Controllers
 
             ViewData["Roles"] = new SelectList(_context.Roles);
             return View(await _context.Employee.ToListAsync());
+            ViewData["RolesNames"] = new SelectList(_context.Roles).ToString();
         }
 
         // GET: Employees/Details/5
