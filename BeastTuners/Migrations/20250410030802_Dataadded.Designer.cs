@@ -4,6 +4,7 @@ using BeastTuners.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeastTuners.Migrations
 {
     [DbContext(typeof(BeastTunersContext))]
-    partial class BeastTunersContextModelSnapshot : ModelSnapshot
+    [Migration("20250410030802_Dataadded")]
+    partial class Dataadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,15 +125,15 @@ namespace BeastTuners.Migrations
                         new
                         {
                             CustomerID = 1,
-                            Address = "123 Main St, New Lynn",
-                            FirstName = "Zoheba",
-                            LastName = "Ali",
+                            Address = "123 Main St",
+                            FirstName = "John",
+                            LastName = "Doe",
                             PhoneNumber = "0212345678"
                         },
                         new
                         {
                             CustomerID = 2,
-                            Address = "456 Elm St, Avondale",
+                            Address = "456 Elm St",
                             FirstName = "Jane",
                             LastName = "Smith",
                             PhoneNumber = "0276543210"
@@ -138,7 +141,7 @@ namespace BeastTuners.Migrations
                         new
                         {
                             CustomerID = 3,
-                            Address = "789 Park Ave, Avondale",
+                            Address = "789 Park Ave",
                             FirstName = "Mike",
                             LastName = "Brown",
                             PhoneNumber = "0214455667"
@@ -146,7 +149,7 @@ namespace BeastTuners.Migrations
                         new
                         {
                             CustomerID = 4,
-                            Address = "321 Ocean Rd, Manukau",
+                            Address = "321 Ocean Rd",
                             FirstName = "Sara",
                             LastName = "Lee",
                             PhoneNumber = "0229988776"
@@ -154,34 +157,10 @@ namespace BeastTuners.Migrations
                         new
                         {
                             CustomerID = 5,
-                            Address = "160 River St, New Lynn",
+                            Address = "160 River St",
                             FirstName = "Chris",
                             LastName = "Taylor",
                             PhoneNumber = "0271122334"
-                        },
-                        new
-                        {
-                            CustomerID = 6,
-                            Address = "212 Rosebank Rd, Avondale",
-                            FirstName = "Mujahid",
-                            LastName = "Raza",
-                            PhoneNumber = "0226538745"
-                        },
-                        new
-                        {
-                            CustomerID = 7,
-                            Address = "160 Riverton Dr, Papatoetoe",
-                            FirstName = "Falisha",
-                            LastName = "Umaynah",
-                            PhoneNumber = "0271187334"
-                        },
-                        new
-                        {
-                            CustomerID = 8,
-                            Address = "56 Ash St, Avondael",
-                            FirstName = "Yashween",
-                            LastName = "Singh",
-                            PhoneNumber = "0271137334"
                         });
                 });
 
@@ -221,9 +200,9 @@ namespace BeastTuners.Migrations
                         new
                         {
                             EmployeeID = 1,
-                            FirstName = "Sheik",
-                            HireDate = new DateTime(2023, 4, 11, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(3871),
-                            LastName = "Farhaan",
+                            FirstName = "Alice",
+                            HireDate = new DateTime(2023, 4, 10, 15, 8, 1, 880, DateTimeKind.Local).AddTicks(1269),
+                            LastName = "Johnson",
                             PhoneNumber = "0229988776",
                             Role = 0
                         },
@@ -231,7 +210,7 @@ namespace BeastTuners.Migrations
                         {
                             EmployeeID = 2,
                             FirstName = "Bob",
-                            HireDate = new DateTime(2024, 4, 11, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(3954),
+                            HireDate = new DateTime(2024, 4, 10, 15, 8, 1, 880, DateTimeKind.Local).AddTicks(1370),
                             LastName = "Williams",
                             PhoneNumber = "0211234987",
                             Role = 0
@@ -240,72 +219,9 @@ namespace BeastTuners.Migrations
                         {
                             EmployeeID = 3,
                             FirstName = "Ethan",
-                            HireDate = new DateTime(2024, 6, 11, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(3957),
+                            HireDate = new DateTime(2024, 6, 10, 15, 8, 1, 880, DateTimeKind.Local).AddTicks(1375),
                             LastName = "Wilson",
                             PhoneNumber = "0204567890",
-                            Role = 0
-                        },
-                        new
-                        {
-                            EmployeeID = 4,
-                            FirstName = "Mia",
-                            HireDate = new DateTime(2024, 8, 11, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(3968),
-                            LastName = "Thompson",
-                            PhoneNumber = "0276543211",
-                            Role = 0
-                        },
-                        new
-                        {
-                            EmployeeID = 5,
-                            FirstName = "Noah",
-                            HireDate = new DateTime(2024, 10, 11, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(3970),
-                            LastName = "Taylor",
-                            PhoneNumber = "0287654321",
-                            Role = 0
-                        },
-                        new
-                        {
-                            EmployeeID = 6,
-                            FirstName = "Olivia",
-                            HireDate = new DateTime(2024, 11, 11, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(3973),
-                            LastName = "Brown",
-                            PhoneNumber = "0209988776",
-                            Role = 0
-                        },
-                        new
-                        {
-                            EmployeeID = 7,
-                            FirstName = "Liam",
-                            HireDate = new DateTime(2024, 12, 11, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(3976),
-                            LastName = "Anderson",
-                            PhoneNumber = "0291234567",
-                            Role = 0
-                        },
-                        new
-                        {
-                            EmployeeID = 8,
-                            FirstName = "Sophia",
-                            HireDate = new DateTime(2025, 1, 11, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(3978),
-                            LastName = "Clark",
-                            PhoneNumber = "0218765432",
-                            Role = 0
-                        },
-                        new
-                        {
-                            EmployeeID = 9,
-                            FirstName = "James",
-                            HireDate = new DateTime(2025, 2, 11, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(3981),
-                            LastName = "Lee",
-                            PhoneNumber = "0223456789",
-                            Role = 0
-                        },
-                        new
-                        {
-                            EmployeeID = 10,
-                            FirstName = "Emma",
-                            HireDate = new DateTime(2025, 3, 11, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(3983),
-                            LastName = "Davis",
-                            PhoneNumber = "0234567890",
                             Role = 0
                         });
                 });
@@ -347,47 +263,20 @@ namespace BeastTuners.Migrations
                         new
                         {
                             AdjustmentID = 1,
-                            AdjustmentDate = new DateTime(2025, 3, 27, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4126),
+                            AdjustmentDate = new DateTime(2025, 3, 31, 0, 0, 0, 0, DateTimeKind.Local),
                             AdjustmentType = "Restock",
                             PartID = 1,
-                            Quantity = 20,
-                            Reason = "Monthly replenishment"
+                            Quantity = 10,
+                            Reason = "Monthly restock"
                         },
                         new
                         {
                             AdjustmentID = 2,
-                            AdjustmentDate = new DateTime(2025, 3, 30, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4131),
+                            AdjustmentDate = new DateTime(2025, 4, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             AdjustmentType = "Damaged",
                             PartID = 2,
-                            Quantity = -3,
-                            Reason = "Damaged in delivery"
-                        },
-                        new
-                        {
-                            AdjustmentID = 3,
-                            AdjustmentDate = new DateTime(2025, 4, 1, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4134),
-                            AdjustmentType = "Restock",
-                            PartID = 3,
-                            Quantity = 10,
-                            Reason = "Supplier delivery"
-                        },
-                        new
-                        {
-                            AdjustmentID = 4,
-                            AdjustmentDate = new DateTime(2025, 4, 3, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4137),
-                            AdjustmentType = "Manual Correction",
-                            PartID = 4,
-                            Quantity = 5,
-                            Reason = "Stock correction"
-                        },
-                        new
-                        {
-                            AdjustmentID = 5,
-                            AdjustmentDate = new DateTime(2025, 4, 6, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4140),
-                            AdjustmentType = "Restock",
-                            PartID = 5,
-                            Quantity = 12,
-                            Reason = "New shipment"
+                            Quantity = -2,
+                            Reason = "Warehouse damage"
                         });
                 });
 
@@ -426,55 +315,15 @@ namespace BeastTuners.Migrations
                             OrderID = 1,
                             PartID = 1,
                             Quantity = 2,
-                            UnitPrice = 75.00m
+                            UnitPrice = 49.99m
                         },
                         new
                         {
                             OrderDetailID = 2,
-                            OrderID = 1,
-                            PartID = 2,
-                            Quantity = 1,
-                            UnitPrice = 300.00m
-                        },
-                        new
-                        {
-                            OrderDetailID = 3,
                             OrderID = 2,
-                            PartID = 3,
-                            Quantity = 2,
-                            UnitPrice = 60.00m
-                        },
-                        new
-                        {
-                            OrderDetailID = 4,
-                            OrderID = 3,
-                            PartID = 1,
-                            Quantity = 4,
-                            UnitPrice = 75.00m
-                        },
-                        new
-                        {
-                            OrderDetailID = 5,
-                            OrderID = 3,
-                            PartID = 4,
-                            Quantity = 1,
-                            UnitPrice = 150.00m
-                        },
-                        new
-                        {
-                            OrderDetailID = 6,
-                            OrderID = 4,
-                            PartID = 5,
-                            Quantity = 2,
-                            UnitPrice = 87.75m
-                        },
-                        new
-                        {
-                            OrderDetailID = 7,
-                            OrderID = 5,
                             PartID = 2,
                             Quantity = 1,
-                            UnitPrice = 220.00m
+                            UnitPrice = 19.99m
                         });
                 });
 
@@ -511,41 +360,17 @@ namespace BeastTuners.Migrations
                         {
                             OrderID = 1,
                             CustomerID = 1,
-                            OrderDate = new DateTime(2025, 4, 1, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4225),
+                            OrderDate = new DateTime(2025, 4, 8, 0, 0, 0, 0, DateTimeKind.Local),
                             Status = "Shipped",
-                            TotalAmount = 450.00m
+                            TotalAmount = 99.98m
                         },
                         new
                         {
                             OrderID = 2,
                             CustomerID = 2,
-                            OrderDate = new DateTime(2025, 4, 3, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4229),
-                            Status = "Delivered",
-                            TotalAmount = 120.00m
-                        },
-                        new
-                        {
-                            OrderID = 3,
-                            CustomerID = 3,
-                            OrderDate = new DateTime(2025, 4, 6, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4232),
-                            Status = "Processing",
-                            TotalAmount = 300.00m
-                        },
-                        new
-                        {
-                            OrderID = 4,
-                            CustomerID = 4,
-                            OrderDate = new DateTime(2025, 4, 8, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4235),
-                            Status = "Cancelled",
-                            TotalAmount = 175.50m
-                        },
-                        new
-                        {
-                            OrderID = 5,
-                            CustomerID = 5,
-                            OrderDate = new DateTime(2025, 4, 10, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4238),
+                            OrderDate = new DateTime(2025, 4, 9, 0, 0, 0, 0, DateTimeKind.Local),
                             Status = "Pending",
-                            TotalAmount = 220.00m
+                            TotalAmount = 19.99m
                         });
                 });
 
@@ -590,101 +415,28 @@ namespace BeastTuners.Migrations
                         {
                             PartID = 1,
                             Category = "Brakes",
-                            Description = "High-performance brake pads for sports cars",
-                            ImagePath = "/images/performanceBrakePad.jpg",
-                            PartName = "Performance Brake Pads",
-                            Price = 120.00m,
-                            StockQuantity = 50
+                            Description = "High performance",
+                            PartName = "Brake Pad",
+                            Price = 49.99m,
+                            StockQuantity = 30
                         },
                         new
                         {
                             PartID = 2,
-                            Category = "Wheels",
-                            Description = "Stylish and durable alloy wheels",
-                            ImagePath = "/images/wheels19'.jpg",
-                            PartName = "Alloy Wheels 17\"",
-                            Price = 480.00m,
-                            StockQuantity = 20
+                            Category = "Engine",
+                            Description = "Synthetic",
+                            PartName = "Oil Filter",
+                            Price = 19.99m,
+                            StockQuantity = 50
                         },
                         new
                         {
                             PartID = 3,
                             Category = "Engine",
-                            Description = "Powerful V8 engine block for muscle cars",
-                            ImagePath = "/images/v8Engine.jpg",
-                            PartName = "V8 Engine Block",
-                            Price = 2500.00m,
-                            StockQuantity = 5
-                        },
-                        new
-                        {
-                            PartID = 4,
-                            Category = "Engine",
-                            Description = "Improves airflow and boosts horsepower",
-                            ImagePath = "/images/Intake.jpg",
-                            PartName = "Cold Air Intake",
-                            Price = 200.00m,
-                            StockQuantity = 15
-                        },
-                        new
-                        {
-                            PartID = 5,
-                            Category = "Exterior",
-                            Description = "Lightweight and aerodynamic hood",
-                            ImagePath = "/images/Hood.jpg",
-                            PartName = "Carbon Fiber Hood",
-                            Price = 950.00m,
-                            StockQuantity = 3
-                        },
-                        new
-                        {
-                            PartID = 6,
-                            Category = "Suspension",
-                            Description = "Adjustable ride height and improved handling",
-                            ImagePath = "/images/coilsuspension.jpg",
-                            PartName = "Coilover Suspension Kit",
-                            Price = 850.00m,
-                            StockQuantity = 8
-                        },
-                        new
-                        {
-                            PartID = 7,
-                            Category = "Exhaust",
-                            Description = "Enhances engine performance and sound",
-                            ImagePath = "/images/Subi exhaust.jpg",
-                            PartName = "High Flow Exhaust",
-                            Price = 499.99m,
+                            Description = "Complete set",
+                            PartName = "Clutch Kit",
+                            Price = 199.99m,
                             StockQuantity = 10
-                        },
-                        new
-                        {
-                            PartID = 8,
-                            Category = "Interior",
-                            Description = "Lightweight and secure racing seats",
-                            ImagePath = "/images/Seats.jpg",
-                            PartName = "Bucket Racing Seats",
-                            Price = 750.00m,
-                            StockQuantity = 6
-                        },
-                        new
-                        {
-                            PartID = 9,
-                            Category = "Interior",
-                            Description = "Smart infotainment system for modern cars",
-                            ImagePath = "/images/Display.jpg",
-                            PartName = "Touchscreen Dash Display",
-                            Price = 300.00m,
-                            StockQuantity = 12
-                        },
-                        new
-                        {
-                            PartID = 10,
-                            Category = "Brakes",
-                            Description = "Enhanced cooling and stopping power",
-                            ImagePath = "/images/Rotor.jpg",
-                            PartName = "Slotted Rotors",
-                            Price = 180.00m,
-                            StockQuantity = 25
                         });
                 });
 
@@ -722,54 +474,6 @@ namespace BeastTuners.Migrations
                             PartSuppliersID = 2,
                             PartID = 2,
                             SupplierID = 2
-                        },
-                        new
-                        {
-                            PartSuppliersID = 3,
-                            PartID = 3,
-                            SupplierID = 3
-                        },
-                        new
-                        {
-                            PartSuppliersID = 4,
-                            PartID = 4,
-                            SupplierID = 4
-                        },
-                        new
-                        {
-                            PartSuppliersID = 5,
-                            PartID = 5,
-                            SupplierID = 5
-                        },
-                        new
-                        {
-                            PartSuppliersID = 6,
-                            PartID = 1,
-                            SupplierID = 2
-                        },
-                        new
-                        {
-                            PartSuppliersID = 7,
-                            PartID = 2,
-                            SupplierID = 3
-                        },
-                        new
-                        {
-                            PartSuppliersID = 8,
-                            PartID = 3,
-                            SupplierID = 4
-                        },
-                        new
-                        {
-                            PartSuppliersID = 9,
-                            PartID = 4,
-                            SupplierID = 5
-                        },
-                        new
-                        {
-                            PartSuppliersID = 10,
-                            PartID = 5,
-                            SupplierID = 1
                         });
                 });
 
@@ -813,27 +517,6 @@ namespace BeastTuners.Migrations
                             Address = "42 Mechanics Rd",
                             PhoneNumber = "0800456789",
                             SupplierName = "GearCo"
-                        },
-                        new
-                        {
-                            SupplierID = 3,
-                            Address = "12 Industrial Rd",
-                            PhoneNumber = "0211112222",
-                            SupplierName = "AutoZone Supplies"
-                        },
-                        new
-                        {
-                            SupplierID = 4,
-                            Address = "88 Speedway Ave",
-                            PhoneNumber = "0213334444",
-                            SupplierName = "SpeedParts NZ"
-                        },
-                        new
-                        {
-                            SupplierID = 5,
-                            Address = "5 Workshop Lane",
-                            PhoneNumber = "0215556666",
-                            SupplierName = "MotorTech Ltd"
                         });
                 });
 
@@ -866,72 +549,16 @@ namespace BeastTuners.Migrations
                         new
                         {
                             SupplierDeliveryID = 1,
-                            DeliveryTime = new DateTime(2025, 3, 27, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4364),
+                            DeliveryTime = new DateTime(2025, 4, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             PartID = 1,
                             SupplierID = 1
                         },
                         new
                         {
                             SupplierDeliveryID = 2,
-                            DeliveryTime = new DateTime(2025, 4, 1, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4368),
+                            DeliveryTime = new DateTime(2025, 4, 9, 0, 0, 0, 0, DateTimeKind.Local),
                             PartID = 2,
                             SupplierID = 2
-                        },
-                        new
-                        {
-                            SupplierDeliveryID = 3,
-                            DeliveryTime = new DateTime(2025, 4, 6, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4371),
-                            PartID = 3,
-                            SupplierID = 3
-                        },
-                        new
-                        {
-                            SupplierDeliveryID = 4,
-                            DeliveryTime = new DateTime(2025, 4, 4, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4374),
-                            PartID = 4,
-                            SupplierID = 4
-                        },
-                        new
-                        {
-                            SupplierDeliveryID = 5,
-                            DeliveryTime = new DateTime(2025, 4, 8, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4377),
-                            PartID = 5,
-                            SupplierID = 5
-                        },
-                        new
-                        {
-                            SupplierDeliveryID = 6,
-                            DeliveryTime = new DateTime(2025, 4, 10, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4379),
-                            PartID = 2,
-                            SupplierID = 1
-                        },
-                        new
-                        {
-                            SupplierDeliveryID = 7,
-                            DeliveryTime = new DateTime(2025, 4, 9, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4382),
-                            PartID = 3,
-                            SupplierID = 2
-                        },
-                        new
-                        {
-                            SupplierDeliveryID = 8,
-                            DeliveryTime = new DateTime(2025, 4, 5, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4384),
-                            PartID = 4,
-                            SupplierID = 3
-                        },
-                        new
-                        {
-                            SupplierDeliveryID = 9,
-                            DeliveryTime = new DateTime(2025, 4, 3, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4388),
-                            PartID = 5,
-                            SupplierID = 4
-                        },
-                        new
-                        {
-                            SupplierDeliveryID = 10,
-                            DeliveryTime = new DateTime(2025, 4, 2, 21, 43, 54, 894, DateTimeKind.Local).AddTicks(4390),
-                            PartID = 1,
-                            SupplierID = 5
                         });
                 });
 

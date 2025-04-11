@@ -27,7 +27,7 @@ public class CartService
 
         if (existingItem != null)
         {
-            existingItem.Quantity += item.Quantity;  //Increase quantity if item exists
+            existingItem.Quantity += item.Quantity;  
         }
         else
         {
@@ -46,11 +46,11 @@ public class CartService
         {
             if (quantity > 0)
             {
-                item.Quantity = quantity;  //Update quantity
+                item.Quantity = quantity;  
             }
             else
             {
-                cart.Remove(item); //Remove item if quantity is 0
+                cart.Remove(item); 
             }
         }
 

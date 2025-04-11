@@ -221,7 +221,7 @@ namespace BeastTuners.Controllers
                 PartID = part.PartID,
                 PartName = part.PartName,
                 Price = part.Price,
-                Quantity = quantity,  // Ensure correct quantity is stored
+                Quantity = quantity,  
                 ImagePath = part.ImagePath
             };
 
