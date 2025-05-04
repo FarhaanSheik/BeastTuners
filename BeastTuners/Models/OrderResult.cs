@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using BeastTuners.Areas.Identity.Data;
 
 namespace BeastTuners.Models
 {
@@ -9,7 +10,7 @@ namespace BeastTuners.Models
         public int OrderID { get; set; }
 
         [ForeignKey("Customer")]
-        public int CustomerID { get; set; }
+        public string UserID { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
@@ -23,6 +24,6 @@ namespace BeastTuners.Models
         [StringLength(20)]
         public string Status { get; set; } // e.g., "Pending", "Completed", "Cancelled"
 
-        public Customer Customer { get; set; }
+        public BeastTunersUser User { get; set; }
     }
 }

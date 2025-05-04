@@ -22,7 +22,7 @@ namespace BeastTuners.Controllers
         // GET: OrderResults
         public async Task<IActionResult> Index()
         {
-            var beastTunersContext = _context.OrderResult.Include(o => o.Customer);
+            var beastTunersContext = _context.OrderResult.Include(o => o.User);
             return View(await beastTunersContext.ToListAsync());
         }
 
@@ -35,7 +35,7 @@ namespace BeastTuners.Controllers
             }
 
             var orderResult = await _context.OrderResult
-                .Include(o => o.Customer)
+                .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.OrderID == id);
             if (orderResult == null)
             {
@@ -48,7 +48,7 @@ namespace BeastTuners.Controllers
         // GET: OrderResults/Create
         public IActionResult Create()
         {
-            ViewData["CustomerID"] = new SelectList(_context.Customer, "CustomerID", "Address");
+            ViewData["UserID"] = new SelectList(_context.Users.Where(u => u.UserType == "Customer"), "Id", "Email");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace BeastTuners.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerID"] = new SelectList(_context.Customer, "CustomerID", "Address", orderResult.CustomerID);
+            ViewData["UserID"] = new SelectList(_context.Users.Where(u => u.UserType == "Customer"), "Id", "Email");
             return View(orderResult);
         }
 
@@ -82,7 +82,7 @@ namespace BeastTuners.Controllers
             {
                 return NotFound();
             }
-            ViewData["CustomerID"] = new SelectList(_context.Customer, "CustomerID", "Address", orderResult.CustomerID);
+            ViewData["UserID"] = new SelectList(_context.Users.Where(u => u.UserType == "Customer"), "Id", "Email");
             return View(orderResult);
         }
 
@@ -118,7 +118,7 @@ namespace BeastTuners.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerID"] = new SelectList(_context.Customer, "CustomerID", "Address", orderResult.CustomerID);
+            ViewData["UserID"] = new SelectList(_context.Users.Where(u => u.UserType == "Customer"), "Id", "Email");
             return View(orderResult);
         }
 
@@ -131,7 +131,7 @@ namespace BeastTuners.Controllers
             }
 
             var orderResult = await _context.OrderResult
-                .Include(o => o.Customer)
+                .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.OrderID == id);
             if (orderResult == null)
             {

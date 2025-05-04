@@ -16,30 +16,7 @@ public class BeastTunersContext : IdentityDbContext<BeastTunersUser>
     {
         base.OnModelCreating(builder);
 
-        // --- Customers ---
-        builder.Entity<Customer>().HasData(
-            new Customer { CustomerID = 1, FirstName = "Zoheba", LastName = "Ali", PhoneNumber = "0212345678", Address = "123 Main St, New Lynn" },
-            new Customer { CustomerID = 2, FirstName = "Jane", LastName = "Smith", PhoneNumber = "0276543210", Address = "456 Elm St, Avondale" },
-            new Customer { CustomerID = 3, FirstName = "Mike", LastName = "Brown", PhoneNumber = "0214455667", Address = "789 Park Ave, Avondale" },
-            new Customer { CustomerID = 4, FirstName = "Sara", LastName = "Lee", PhoneNumber = "0229988776", Address = "321 Ocean Rd, Manukau" },
-            new Customer { CustomerID = 5, FirstName = "Chris", LastName = "Taylor", PhoneNumber = "0271122334", Address = "160 River St, New Lynn" },
-            new Customer { CustomerID = 6, FirstName = "Mujahid", LastName = "Raza", PhoneNumber = "0226538745" , Address = "212 Rosebank Rd, Avondale" },
-            new Customer { CustomerID = 7, FirstName = "Falisha", LastName = "Umaynah", PhoneNumber = "0271187334", Address = "160 Riverton Dr, Papatoetoe" },
-            new Customer { CustomerID = 8, FirstName = "Yashween", LastName = "Singh", PhoneNumber = "0271137334", Address = "56 Ash St, Avondael" }
-        );
-
-        builder.Entity<Employee>().HasData(
-           new Employee { EmployeeID = 1, FirstName = "Sheik", LastName = "Farhaan", PhoneNumber = "0229988776", HireDate = DateTime.Now.AddYears(-2) },
-           new Employee { EmployeeID = 2, FirstName = "Bob", LastName = "Williams", PhoneNumber = "0211234987", HireDate = DateTime.Now.AddYears(-1) },
-           new Employee { EmployeeID = 3, FirstName = "Ethan", LastName = "Wilson", PhoneNumber = "0204567890", HireDate = DateTime.Now.AddMonths(-10) },
-           new Employee { EmployeeID = 4, FirstName = "Mia", LastName = "Thompson", PhoneNumber = "0276543211", HireDate = DateTime.Now.AddMonths(-8) },
-           new Employee { EmployeeID = 5, FirstName = "Noah", LastName = "Taylor", PhoneNumber = "0287654321", HireDate = DateTime.Now.AddMonths(-6) },
-           new Employee { EmployeeID = 6, FirstName = "Olivia", LastName = "Brown", PhoneNumber = "0209988776", HireDate = DateTime.Now.AddMonths(-5) },
-           new Employee { EmployeeID = 7, FirstName = "Liam", LastName = "Anderson", PhoneNumber = "0291234567", HireDate = DateTime.Now.AddMonths(-4) },
-           new Employee { EmployeeID = 8, FirstName = "Sophia", LastName = "Clark", PhoneNumber = "0218765432", HireDate = DateTime.Now.AddMonths(-3) },
-           new Employee { EmployeeID = 9, FirstName = "James", LastName = "Lee", PhoneNumber = "0223456789", HireDate = DateTime.Now.AddMonths(-2) },
-           new Employee { EmployeeID = 10, FirstName = "Emma", LastName = "Davis", PhoneNumber = "0234567890", HireDate = DateTime.Now.AddMonths(-1) }
-        );
+      
 
         builder.Entity<Part>().HasData(
             new Part { PartID = 1, PartName = "Performance Brake Pads", Category = "Brakes", Price = 120.00m, StockQuantity = 50, Description = "High-performance brake pads for sports cars", ImagePath = "/images/performanceBrakePad.jpg" },
@@ -74,14 +51,6 @@ public class BeastTunersContext : IdentityDbContext<BeastTunersUser>
  );
 
 
-        // --- OrdersResukts ---
-        builder.Entity<OrderResult>().HasData(
-           new OrderResult { OrderID = 1, CustomerID = 1, OrderDate = DateTime.Now.AddDays(-10), TotalAmount = 450.00m, Status = "Shipped" },
-           new OrderResult { OrderID = 2, CustomerID = 2, OrderDate = DateTime.Now.AddDays(-8), TotalAmount = 120.00m, Status = "Delivered" },
-           new OrderResult { OrderID = 3, CustomerID = 3, OrderDate = DateTime.Now.AddDays(-5), TotalAmount = 300.00m, Status = "Processing" },
-           new OrderResult { OrderID = 4, CustomerID = 4, OrderDate = DateTime.Now.AddDays(-3), TotalAmount = 175.50m, Status = "Cancelled" },
-           new OrderResult { OrderID = 5, CustomerID = 5, OrderDate = DateTime.Now.AddDays(-1), TotalAmount = 220.00m, Status = "Pending" }
-        );
 
 
         // --- Order Details ---
@@ -128,8 +97,7 @@ public class BeastTunersContext : IdentityDbContext<BeastTunersUser>
 
     }
 
-    public DbSet<Customer> Customer { get; set; } = default!;
-    public DbSet<Employee> Employee { get; set; } = default!;
+   
     public DbSet<InventoryAdjustment> InventoryAdjustment { get; set; } = default!;
     public DbSet<OrderDetail> OrderDetail { get; set; } = default!;
     public DbSet<OrderResult> OrderResult { get; set; } = default!;

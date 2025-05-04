@@ -12,71 +12,101 @@
             <h2>Create a new account.</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
             <div class="form-floating mb-3">
-                <input asp-for="Input.FirstName" class="form-control" autocomplete="username" aria-required="true" placeholder="e.g:John" />
+                <input asp-for="Input.FirstName" class="form-control" placeholder="e.g: John" />
                 <label asp-for="Input.FirstName">First Name</label>
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>
+
             <div class="form-floating mb-3">
-                <input asp-for="Input.LastName" class="form-control" autocomplete="username" aria-required="true" placeholder="e.g:Smith" />
+                <input asp-for="Input.LastName" class="form-control" placeholder="e.g: Smith" />
                 <label asp-for="Input.LastName">Last Name</label>
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
+
             <div class="form-floating mb-3">
-                <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="number" aria-required="true" placeholder="0223456789" />
+                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="0223456789" />
                 <label asp-for="Input.PhoneNumber">Phone Number</label>
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
+
             <div class="form-floating mb-3">
-                <input asp-for="Input.Address" class="form-control" autocomplete="address" aria-required="true" placeholder="1234 Elm Street, Springfield" />
+                <input asp-for="Input.Address" class="form-control" placeholder="1234 Elm Street" />
                 <label asp-for="Input.Address">Address</label>
                 <span asp-validation-for="Input.Address" class="text-danger"></span>
             </div>
+
             <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <input asp-for="Input.Email" class="form-control" placeholder="name@example.com" />
                 <label asp-for="Input.Email">Email</label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
+
             <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <input asp-for="Input.Password" class="form-control" placeholder="Password" />
                 <label asp-for="Input.Password">Password</label>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
+
             <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirm Password" />
                 <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+
+            <!-- User Type Dropdown -->
+            <div class="form-floating mb-3">
+                <select asp-for="Input.UserType" class="form-control" id="userTypeDropdown">
+                    <option value="">-- Select User Type --</option>
+                    <option value="Customer">Customer</option>
+                    <option value="Employee">Employee</option>
+                </select>
+                <label asp-for="Input.UserType">User Type</label>
+                <span asp-validation-for="Input.UserType" class="text-danger"></span>
+            </div>
+
+            <!-- Employee Role Dropdown (only shown if user selects Employee) -->
+            <div class="form-floating mb-3" id="roleDropdown" style="display:none;">
+                <select asp-for="Input.Role" class="form-control">
+                    <option value="">-- Select Role --</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Staff">Staff</option>
+                    <option value="Receptionist">Receptionist</option>
+                </select>
+                <label asp-for="Input.Role">Employee Role</label>
+                <span asp-validation-for="Input.Role" class="text-danger"></span>
+            </div>
+
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
     </div>
+
     <div class="col-md-6 col-md-offset-2">
         <section>
             <h3>Use another service to register.</h3>
             <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
+            @if ((Model.ExternalLogins?.Count ?? 0) == 0)
+            {
+                <div>
+                    <p>
+                        No external authentication services configured.
+                        <a href="https://go.microsoft.com/fwlink/?LinkID=532715">Learn how to enable them</a>.
+                    </p>
+                </div>
+            }
+            else
+            {
+                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                     <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
+                        @foreach (var provider in Model.ExternalLogins!)
+                        {
+                            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name">
+                                @provider.DisplayName
+                            </button>
+                        }
                     </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
+                </form>
             }
         </section>
     </div>
@@ -84,4 +114,19 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const userType = document.getElementById("userTypeDropdown");
+            const roleDropdown = document.getElementById("roleDropdown");
+
+            userType.addEventListener("change", function () {
+                roleDropdown.style.display = userType.value === "Employee" ? "block" : "none";
+            });
+
+            // Trigger visibility on initial load in case of validation errors
+            if (userType.value === "Employee") {
+                roleDropdown.style.display = "block";
+            }
+        });
+    </script>
 }
