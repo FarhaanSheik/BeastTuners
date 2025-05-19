@@ -10,9 +10,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BeastTuners.Data;
 using BeastTuners.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace BeastTuners.Controllers
 {
+   
     public class PartsController : Controller
     {
         private readonly BeastTunersContext _context;
@@ -26,6 +29,7 @@ namespace BeastTuners.Controllers
             _cartService = cartService;
         }
 
+     
         public async Task<IActionResult> Index(string searchString, string categoryFilter)
         {
             var parts = _context.Part.AsQueryable();
@@ -79,7 +83,7 @@ namespace BeastTuners.Controllers
 
             return View(part);
         }
-
+        [Authorize(Roles = "Employee")]
         public IActionResult Create()
         {
             return View();
@@ -87,6 +91,7 @@ namespace BeastTuners.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employee")]
         public async Task<IActionResult> Create([Bind("PartID,PartName,Category,Price,StockQuantity,Description")] Part part, IFormFile ImageFile)
         {
             if (ModelState.IsValid)
@@ -112,6 +117,7 @@ namespace BeastTuners.Controllers
             return View(part);
         }
 
+        [Authorize(Roles = "Employee")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -129,6 +135,7 @@ namespace BeastTuners.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employee")]
         public async Task<IActionResult> Edit(int id, [Bind("PartID,PartName,Category,Price,StockQuantity,Description,ImagePath")] Part part, IFormFile ImageFile)
         {
             if (id != part.PartID)
@@ -172,7 +179,7 @@ namespace BeastTuners.Controllers
             }
             return View(part);
         }
-
+        [Authorize(Roles = "Employee")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -192,6 +199,7 @@ namespace BeastTuners.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employee")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var part = await _context.Part.FindAsync(id);

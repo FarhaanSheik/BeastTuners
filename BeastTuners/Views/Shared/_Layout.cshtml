@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<BeastTuners.Areas.Identity.Data.BeastTunersUser> UserManager
+@inject SignInManager<BeastTuners.Areas.Identity.Data.BeastTunersUser> SignInManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,28 +32,33 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Parts" asp-action="Index">Parts</a>
                         </li>
+                      
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="InventoryAdjustments" asp-action="Index">InventoryAdjustments</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="OrderResults" asp-action="Index">Order</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="OrderResults" asp-action="Index">OrderResults</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Suppliers" asp-action="Index">Suppliers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PartSuppliers" asp-action="Index">PartSuppliers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="SuppliersDeliveries" asp-action="Index">SuppliersDeliveries</a>
-                        </li>
+
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Employee"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="InventoryAdjustments" asp-action="Index">InventoryAdjustments</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Suppliers" asp-action="Index">Suppliers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="PartSuppliers" asp-action="Index">PartSuppliers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="SuppliersDeliveries" asp-action="Index">SuppliersDeliveries</a>
+                            </li>
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Parts" asp-action="Cart">🛒 View Cart</a>
                         </li>
-
                     </ul>
                 </div>
-                <partial name="_LoginPartial"/>
+                <partial name="_LoginPartial" />
             </div>
         </nav>
     </header>

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using BeastTuners.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace BeastTuners.Data;
 
@@ -16,7 +17,91 @@ public class BeastTunersContext : IdentityDbContext<BeastTunersUser>
     {
         base.OnModelCreating(builder);
 
-      
+        var hasher = new PasswordHasher<BeastTunersUser>();
+
+        builder.Entity<BeastTunersUser>().HasData(
+            new BeastTunersUser
+            {
+                Id = "user1",
+                UserName = "John@gmail.com",
+                NormalizedUserName = "JOHN@GMAIL.COM",
+                Email = "John@gmail.com",
+                NormalizedEmail = "JOHN@GMAIL.COM",
+                EmailConfirmed = true,
+                PhoneNumber = "0210000001",
+                FirstName = "John",
+                LastName = "Doe",
+                Address = "1 Main Street",
+                UserType = "Customer",
+                PasswordHash = hasher.HashPassword(null!, "Password@123"),
+                SecurityStamp = Guid.NewGuid().ToString()
+            },
+            new BeastTunersUser
+            {
+                Id = "user2",
+                UserName = "Alice@yahoo.com",
+                NormalizedUserName = "ALICE@YAHOO.COM",
+                Email = "Alice@yahoo.com",
+                NormalizedEmail = "ALICE@YAHOO.COM",
+                EmailConfirmed = true,
+                PhoneNumber = "0210000002",
+                FirstName = "Alice",
+                LastName = "Smith",
+                Address = "2 Oak Road",
+                UserType = "Customer",
+                PasswordHash = hasher.HashPassword(null!, "Password@123"),
+                SecurityStamp = Guid.NewGuid().ToString()
+            },
+            new BeastTunersUser
+            {
+                Id = "user3",
+                UserName = "Ethan@gmail.com",
+                NormalizedUserName = "ETHAN@GMAIL.COM",
+                Email = "Ethan@gmail.com",
+                NormalizedEmail = "ETHAN@GMAIL.COM",
+                EmailConfirmed = true,
+                PhoneNumber = "0210000003",
+                FirstName = "Ethan",
+                LastName = "Williams",
+                Address = "3 Beachside Ave",
+                UserType = "Customer",
+                PasswordHash = hasher.HashPassword(null!, "Password@123"),
+                SecurityStamp = Guid.NewGuid().ToString()
+            },
+            new BeastTunersUser
+            {
+                Id = "user4",
+                UserName = "Sarah@gmail.com",
+                NormalizedUserName = "SARAH@GMAIL.COM",
+                Email = "Sarah@gmail.com",
+                NormalizedEmail = "SARAH@GMAIL.COM",
+                EmailConfirmed = true,
+                PhoneNumber = "0210000004",
+                FirstName = "Sarah",
+                LastName = "Lee",
+                Address = "4 Valley Rd",
+                UserType = "Customer",
+                PasswordHash = hasher.HashPassword(null!, "Password@123"),
+                SecurityStamp = Guid.NewGuid().ToString()
+            },
+            new BeastTunersUser
+            {
+                Id = "user5",
+                UserName = "James@gmail.com",
+                NormalizedUserName = "JAMES@GMAIL.COM",
+                Email = "James@gmail.com",
+                NormalizedEmail = "JAMES@GMAIL.COM",
+                EmailConfirmed = true,
+                PhoneNumber = "0210000005",
+                FirstName = "James",
+                LastName = "Nguyen",
+                Address = "5 Racecourse Rd",
+                UserType = "Customer",
+                PasswordHash = hasher.HashPassword(null!, "Password@123"),
+                SecurityStamp = Guid.NewGuid().ToString()
+            }
+        );
+
 
         builder.Entity<Part>().HasData(
             new Part { PartID = 1, PartName = "Performance Brake Pads", Category = "Brakes", Price = 120.00m, StockQuantity = 50, Description = "High-performance brake pads for sports cars", ImagePath = "/images/performanceBrakePad.jpg" },
@@ -64,6 +149,14 @@ public class BeastTunersContext : IdentityDbContext<BeastTunersUser>
      new OrderDetail { OrderDetailID = 7, OrderID = 5, PartID = 2, Quantity = 1, UnitPrice = 220.00m }
  );
 
+        // --- Order Results ---
+        builder.Entity<OrderResult>().HasData(
+            new OrderResult { OrderID = 1, UserID = "user1", OrderDate = DateTime.Now.AddDays(-10), TotalAmount = 495.00m, Status = "Completed" },
+            new OrderResult { OrderID = 2, UserID = "user2", OrderDate = DateTime.Now.AddDays(-9), TotalAmount = 120.00m, Status = "Pending" },
+            new OrderResult { OrderID = 3, UserID = "user3", OrderDate = DateTime.Now.AddDays(-8), TotalAmount = 450.00m, Status = "Completed" },
+            new OrderResult { OrderID = 4, UserID = "user4", OrderDate = DateTime.Now.AddDays(-7), TotalAmount = 175.50m, Status = "Pending" },
+            new OrderResult { OrderID = 5, UserID = "user5", OrderDate = DateTime.Now.AddDays(-6), TotalAmount = 220.00m, Status = "Cancelled" }
+        );
 
         // --- PartSuppliers ---
         builder.Entity<PartSupplier>().HasData(

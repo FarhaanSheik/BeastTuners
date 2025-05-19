@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BeastTuners.Data;
 using BeastTuners.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace BeastTuners.Controllers
 {
+    [Authorize(Roles = "Employee")]
     public class SuppliersController : Controller
     {
         private readonly BeastTunersContext _context;

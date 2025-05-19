@@ -7,7 +7,7 @@ var connectionString = builder.Configuration.GetConnectionString("BeastTunersCon
 
 builder.Services.AddDbContext<BeastTunersContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<BeastTunersUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BeastTunersContext>();
+builder.Services.AddDefaultIdentity<BeastTunersUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<BeastTunersContext>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
@@ -42,4 +42,17 @@ app.MapControllerRoute(
 
 
 app.MapRazorPages();
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    string[] roles = { "Employee", "Customer", "Manager", "Staff", "Receptionist" };
+
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
+}
 app.Run();

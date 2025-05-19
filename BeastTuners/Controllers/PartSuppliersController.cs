@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BeastTuners.Data;
 using BeastTuners.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace BeastTuners.Controllers
 {
+    
     public class PartSuppliersController : Controller
     {
         private readonly BeastTunersContext _context;

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BeastTuners.Data;
 using BeastTuners.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace BeastTuners.Controllers
 {
@@ -47,6 +49,7 @@ namespace BeastTuners.Controllers
         }
 
         // GET: OrderDetails/Create
+        [Authorize(Roles = "Employee")]
         public IActionResult Create()
         {
             ViewData["OrderID"] = new SelectList(_context.Set<OrderResult>(), "OrderID", "Status");
