@@ -198,4 +198,6 @@ public class BeastTunersContext : IdentityDbContext<BeastTunersUser>
     public DbSet<PartSupplier> PartSupplier { get; set; } = default!;
     public DbSet<Supplier> Supplier { get; set; } = default!;
     public DbSet<SuppliersDelivery> SuppliersDelivery { get; set; } = default!;
+
+public DbSet<BeastTuners.Models.CartItem> CartItem { get; set; } = default!;
 }

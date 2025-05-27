@@ -25,5 +25,7 @@ namespace BeastTuners.Models
         public string Status { get; set; } // e.g., "Pending", "Completed", "Cancelled"
 
         public BeastTunersUser User { get; set; }
+
+        public ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }
