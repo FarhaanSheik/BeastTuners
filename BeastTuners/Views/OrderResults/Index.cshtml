@@ -1,39 +1,138 @@
-﻿@model IEnumerable<BeastTuners.Models.OrderResult>
+﻿@model PaginatedList<BeastTuners.Models.OrderResult>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<BeastTuners.Areas.Identity.Data.BeastTunersUser> UserManager
 
 @{
     ViewData["Title"] = "Orders";
+    var user = UserManager.GetUserAsync(User).Result;
+    var isEmployee = User.IsInRole("Employee") || User.IsInRole("Manager") || User.IsInRole("Staff") || User.IsInRole("Receptionist");
 }
 
 <h1>Orders</h1>
 
-<div class="mb-3">
-    <a asp-action="Create" class="btn btn-success">Create New Order</a>
-</div>
+@if (isEmployee)
+{
+    <div class="mb-3">
+        <a asp-action="Create" class="btn btn-success">Create New Order</a>
+    </div>
+}
+
+<form asp-action="Index" method="get" class="mb-3">
+    <div class="form-inline">
+        <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" class="form-control" placeholder="Search by Status or Address" />
+        <input type="submit" value="Search" class="btn btn-outline-primary ms-2" />
+        <a asp-action="Index" class="btn btn-outline-secondary ms-2">Reset</a>
+    </div>
+</form>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.OrderDate)</th>
-            <th>@Html.DisplayNameFor(model => model.TotalAmount)</th>
-            <th>@Html.DisplayNameFor(model => model.Status)</th>
-            <th>@Html.DisplayNameFor(model => model.User)</th>
-            <th>Actions</th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["DateSortParm"]"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    Order Date
+                    @if ((string)ViewData["CurrentSort"] == "OrderDate")
+                    {
+                        <span>↑</span>
+                    }
+                    else if ((string)ViewData["CurrentSort"] == "date_desc")
+                    {
+                        <span>↓</span>
+                    }
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["AmountSortParm"]"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    Total Amount
+                    @if ((string)ViewData["CurrentSort"] == "TotalAmount")
+                    {
+                        <span>↑</span>
+                    }
+                    else if ((string)ViewData["CurrentSort"] == "amount_desc")
+                    {
+                        <span>↓</span>
+                    }
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["StatusSortParm"]"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    Status
+                    @if ((string)ViewData["CurrentSort"] == "Status")
+                    {
+                        <span>↑</span>
+                    }
+                    else if ((string)ViewData["CurrentSort"] == "status_desc")
+                    {
+                        <span>↓</span>
+                    }
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["AddressSortParm"]"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    User Address
+                    @if ((string)ViewData["CurrentSort"] == "Address")
+                    {
+                        <span>↑</span>
+                    }
+                    else if ((string)ViewData["CurrentSort"] == "address_desc")
+                    {
+                        <span>↓</span>
+                    }
+                </a>
+            </th>
+            @if (isEmployee)
+            {
+                <th>Actions</th>
+            }
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
-                <td>@Html.DisplayFor(modelItem => item.TotalAmount)</td>
-                <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                <td>@Html.DisplayFor(modelItem => item.User.Address)</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.OrderID" class="btn btn-secondary btn-sm">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.OrderID" class="btn btn-info btn-sm">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.OrderID" class="btn btn-danger btn-sm">Delete</a>
-                </td>
+                <td>@item.OrderDate.ToShortDateString()</td>
+                <td>@item.TotalAmount.ToString("C")</td>
+                <td>@item.Status</td>
+                <td>@item.User?.Address</td>
+                @if (isEmployee)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.OrderID" class="btn btn-sm btn-secondary me-1">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.OrderID" class="btn btn-sm btn-info me-1">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.OrderID" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                }
             </tr>
         }
     </tbody>
 </table>
+
+<div class="d-flex justify-content-between align-items-center">
+    <span>Page @Model.PageIndex of @Model.TotalPages</span>
+
+    <div>
+        <a asp-action="Index"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-outline-primary @(Model.HasPreviousPage ? "" : "disabled")">
+            Previous
+        </a>
+
+        <a asp-action="Index"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-outline-primary @(Model.HasNextPage ? "" : "disabled")">
+            Next
+        </a>
+    </div>
+</div>
