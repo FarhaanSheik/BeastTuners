@@ -1,8 +1,218 @@
-﻿@*
+﻿@model IEnumerable<BeastTuners.Models.Part>
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
     ViewData["Title"] = "Engine Parts";
 }
+
 <h2>Engine Parts</h2>
 <p>Explore our selection of high-performance engine parts.</p>
+
+<!-- Image Comparison Slider -->
+<section class="engine-comparison-section">
+    <div class="image-comparison-container">
+        <h2>See the Transformation</h2>
+        <p class="subtitle">Slide to compare stock vs. upgraded performance engines</p>
+
+        <div class="image-compare">
+            <!-- Before Image (Stock Engine) -->
+            <div class="image-compare__before">
+                <img src="/images/NismoEngine.jpg" alt="Stock Engine">
+                <div class="image-label">Stock Engine</div>
+            </div>
+
+            <!-- After Image (Upgraded Engine) -->
+            <div class="image-compare__after">
+                <img src="/images/Enginecam.jpg" alt="Upgraded Performance Engine">
+                <div class="image-label">Performance Upgrade</div>
+            </div>
+
+            <!-- Slider Control -->
+            <input type="range" class="image-compare__slider" min="0" max="100" value="50">
+            <div class="image-compare__divider"></div>
+        </div>
+
+        <div class="comparison-description">
+            <p>Our performance upgrades increase horsepower by 30-50% while maintaining reliability.</p>
+            <a href="/shop/engine-upgrades" class="btn btn-primary">View Upgrade Packages</a>
+        </div>
+    </div>
+</section>
+
+@section Styles {
+    <style>
+        .engine-comparison-section {
+            margin: 40px 0;
+        }
+
+        .image-comparison-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .image-compare {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            margin: 40px 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-compare__before,
+        .image-compare__after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+            .image-compare__before img,
+            .image-compare__after img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+        .image-compare__after {
+            width: 50%;
+        }
+
+        .image-compare__slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            opacity: 0;
+            cursor: ew-resize;
+            z-index: 10;
+        }
+
+        .image-compare__divider {
+            position: absolute;
+            width: 4px;
+            height: 100%;
+            background: white;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+        }
+
+            .image-compare__divider::before {
+                content: '↔';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-size: 24px;
+                background: rgba(0, 0, 0, 0.5);
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+        .image-label {
+            position: absolute;
+            bottom: 20px;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 4px;
+            font-weight: bold;
+            z-index: 3;
+        }
+
+        .image-compare__before .image-label {
+            left: 20px;
+        }
+
+        .image-compare__after .image-label {
+            right: 20px;
+        }
+
+        .comparison-description {
+            margin-top: 20px;
+        }
+
+        @@media (max-width: 768px) {
+            .image-compare {
+                height: 350px;
+            }
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageCompare = document.querySelector('.image-compare');
+            if (!imageCompare) return;
+
+            const imageBefore = imageCompare.querySelector('.image-compare__before');
+            const imageAfter = imageCompare.querySelector('.image-compare__after');
+            const slider = imageCompare.querySelector('.image-compare__slider');
+            const divider = imageCompare.querySelector('.image-compare__divider');
+
+            function moveSlider(position) {
+                const newWidth = (position / slider.max) * 100;
+                imageAfter.style.width = `${newWidth}%`;
+                divider.style.left = `${newWidth}%`;
+            }
+
+            // Initialize slider
+            moveSlider(slider.value);
+
+            // Slider input event
+            slider.addEventListener('input', function(e) {
+                moveSlider(e.target.value);
+            });
+
+            // Click to move
+            imageCompare.addEventListener('click', function(e) {
+                const rect = imageCompare.getBoundingClientRect();
+                const position = ((e.clientX - rect.left) / rect.width) * 100;
+                const sliderValue = (position / 100) * slider.max;
+
+                slider.value = sliderValue;
+                moveSlider(sliderValue);
+            });
+
+            // Drag divider
+            let isDragging = false;
+            divider.addEventListener('mousedown', function() {
+                isDragging = true;
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (!isDragging) return;
+
+                const rect = imageCompare.getBoundingClientRect();
+                let position = ((e.clientX - rect.left) / rect.width) * 100;
+                position = Math.max(0, Math.min(100, position));
+                const sliderValue = (position / 100) * slider.max;
+
+                slider.value = sliderValue;
+                moveSlider(sliderValue);
+            });
+
+            document.addEventListener('mouseup', function() {
+                isDragging = false;
+            });
+        });
+    </script>
+}

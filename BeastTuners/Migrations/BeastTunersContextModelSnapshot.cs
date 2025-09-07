@@ -117,7 +117,7 @@ namespace BeastTuners.Migrations
                             Id = "user1",
                             AccessFailedCount = 0,
                             Address = "1 Main Street",
-                            ConcurrencyStamp = "08b82f4a-7b7c-4f43-8b1e-1264715a6a7f",
+                            ConcurrencyStamp = "9c553535-34f5-46cb-828a-9b67a0319a3f",
                             Email = "John@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "John",
@@ -125,10 +125,10 @@ namespace BeastTuners.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOHN@GMAIL.COM",
                             NormalizedUserName = "JOHN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEM0UuN5EpdxSR+MzdMMGx7iJTfWz3r2/4yL1WhPzDmE2wOWKa5wPHBG0a6D+0M/LXA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKKHT3VDBNT0x35QtK05rS/E+/bT01AcJDHFut+r1oS7VJw6l874rbFPEsKnbGoinA==",
                             PhoneNumber = "0210000001",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e84ce2c8-b720-4446-be24-fb71fc0fb851",
+                            SecurityStamp = "beb34d8c-ac72-4fb4-8f62-84818a4b4363",
                             TwoFactorEnabled = false,
                             UserName = "John@gmail.com",
                             UserType = "Customer"
@@ -138,7 +138,7 @@ namespace BeastTuners.Migrations
                             Id = "user2",
                             AccessFailedCount = 0,
                             Address = "2 Oak Road",
-                            ConcurrencyStamp = "78712319-1b6d-4ba3-af33-e428cfe63fed",
+                            ConcurrencyStamp = "3bb82cfb-c816-4813-82e4-99dd48d2a84e",
                             Email = "Alice@yahoo.com",
                             EmailConfirmed = true,
                             FirstName = "Alice",
@@ -146,10 +146,10 @@ namespace BeastTuners.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ALICE@YAHOO.COM",
                             NormalizedUserName = "ALICE@YAHOO.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELoFshJ1c5fpltAkOuItXPZJpjL0hd5v/vlAofX3ivCYFCNiIJdf6F26QGKow47Gog==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEvy6Y70nx8yR9Tb5s58TjevzzEbhKDbrF0yfIKKEr7AwV6OyD1LKFkj/vM5t+jGXg==",
                             PhoneNumber = "0210000002",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3fffac4f-8687-47b5-8e93-db2751d1aeb5",
+                            SecurityStamp = "72b39505-b374-467d-824f-b24a287cdb87",
                             TwoFactorEnabled = false,
                             UserName = "Alice@yahoo.com",
                             UserType = "Customer"
@@ -159,7 +159,7 @@ namespace BeastTuners.Migrations
                             Id = "user3",
                             AccessFailedCount = 0,
                             Address = "3 Beachside Ave",
-                            ConcurrencyStamp = "4b86297e-3f39-4203-98d6-f27374a11643",
+                            ConcurrencyStamp = "3c5e1d31-fde0-4a5f-bdc7-bfc187e52745",
                             Email = "Ethan@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Ethan",
@@ -167,10 +167,10 @@ namespace BeastTuners.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ETHAN@GMAIL.COM",
                             NormalizedUserName = "ETHAN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJy6f2mCc38NRQDl4ZyfdRCFmr328ByR6yPx8gup4bq96E6ayp66dJaAxqn0L0sv2g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEM0HU4njZGtFZImYJTjbxfWiMKrchmQzIYtoowmwyxCPfIlFhbNW6YAwxteQVtsvow==",
                             PhoneNumber = "0210000003",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1e87be25-a786-4cfe-9f21-2d1be452f81d",
+                            SecurityStamp = "9d52a478-9d4b-49d8-a2c5-b14235b6ea9a",
                             TwoFactorEnabled = false,
                             UserName = "Ethan@gmail.com",
                             UserType = "Customer"
@@ -180,7 +180,7 @@ namespace BeastTuners.Migrations
                             Id = "user4",
                             AccessFailedCount = 0,
                             Address = "4 Valley Rd",
-                            ConcurrencyStamp = "cb1d7a68-82c2-46c6-a01a-b84a9c35b5f9",
+                            ConcurrencyStamp = "37f1ad40-fa76-498c-9f7e-543b28c5c690",
                             Email = "Sarah@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Sarah",
@@ -188,10 +188,10 @@ namespace BeastTuners.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SARAH@GMAIL.COM",
                             NormalizedUserName = "SARAH@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENHG55zkUVfp5/bGg+czLZFeTN5Y1lu1HV6C359g668D2PeiCYNNYqAGEdfTZxfgIw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMRcSoKEPnJE5Tvw5SUY+ltEmB89iPAAT9c0W8FUxyRGLxLfrcMcoghWD4NlKL9vlQ==",
                             PhoneNumber = "0210000004",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f86bdb13-ce02-4e0b-a453-8f70f2b98951",
+                            SecurityStamp = "7ea6bc65-2833-49fd-af98-1b46419048ab",
                             TwoFactorEnabled = false,
                             UserName = "Sarah@gmail.com",
                             UserType = "Customer"
@@ -201,7 +201,7 @@ namespace BeastTuners.Migrations
                             Id = "user5",
                             AccessFailedCount = 0,
                             Address = "5 Racecourse Rd",
-                            ConcurrencyStamp = "961cee23-777b-4121-9588-d79854d299d8",
+                            ConcurrencyStamp = "32049e19-0837-4679-bd99-9edae55955ff",
                             Email = "James@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "James",
@@ -209,44 +209,14 @@ namespace BeastTuners.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JAMES@GMAIL.COM",
                             NormalizedUserName = "JAMES@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN4WUy62qpZ3w3mknuMTacJt+M1q04bMO1+pXwz5hhDAE2aGRlS9GsFT4vdUuvy7cQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHRjqebH2vpjiv1sHRXmtoO0qjvBZeHznH+YSOjoJ1QPioLKaDZmsIIiFECs+jfF8g==",
                             PhoneNumber = "0210000005",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a6385b6c-0765-4ec7-9650-f99d55cfdab0",
+                            SecurityStamp = "5e5c3225-35ab-4600-bdc6-a5b22eca0afe",
                             TwoFactorEnabled = false,
                             UserName = "James@gmail.com",
                             UserType = "Customer"
                         });
-                });
-
-            modelBuilder.Entity("BeastTuners.Models.CartItem", b =>
-                {
-                    b.Property<int>("CartItemID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartItemID"));
-
-                    b.Property<string>("ImagePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PartID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PartName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("CartItemID");
-
-                    b.ToTable("CartItem");
                 });
 
             modelBuilder.Entity("BeastTuners.Models.InventoryAdjustment", b =>
@@ -280,13 +250,13 @@ namespace BeastTuners.Migrations
 
                     b.HasIndex("PartID");
 
-                    b.ToTable("InventoryAdjustment");
+                    b.ToTable("InventoryAdjustment", (string)null);
 
                     b.HasData(
                         new
                         {
                             AdjustmentID = 1,
-                            AdjustmentDate = new DateTime(2025, 5, 12, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(5609),
+                            AdjustmentDate = new DateTime(2025, 4, 28, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(2036),
                             AdjustmentType = "Restock",
                             PartID = 1,
                             Quantity = 20,
@@ -295,7 +265,7 @@ namespace BeastTuners.Migrations
                         new
                         {
                             AdjustmentID = 2,
-                            AdjustmentDate = new DateTime(2025, 5, 15, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(5762),
+                            AdjustmentDate = new DateTime(2025, 5, 1, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(2205),
                             AdjustmentType = "Damaged",
                             PartID = 2,
                             Quantity = -3,
@@ -304,7 +274,7 @@ namespace BeastTuners.Migrations
                         new
                         {
                             AdjustmentID = 3,
-                            AdjustmentDate = new DateTime(2025, 5, 17, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(5766),
+                            AdjustmentDate = new DateTime(2025, 5, 3, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(2211),
                             AdjustmentType = "Restock",
                             PartID = 3,
                             Quantity = 10,
@@ -313,7 +283,7 @@ namespace BeastTuners.Migrations
                         new
                         {
                             AdjustmentID = 4,
-                            AdjustmentDate = new DateTime(2025, 5, 19, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(5769),
+                            AdjustmentDate = new DateTime(2025, 5, 5, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(2215),
                             AdjustmentType = "Manual Correction",
                             PartID = 4,
                             Quantity = 5,
@@ -322,7 +292,7 @@ namespace BeastTuners.Migrations
                         new
                         {
                             AdjustmentID = 5,
-                            AdjustmentDate = new DateTime(2025, 5, 22, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(5772),
+                            AdjustmentDate = new DateTime(2025, 5, 8, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(2224),
                             AdjustmentType = "Restock",
                             PartID = 5,
                             Quantity = 12,
@@ -356,7 +326,7 @@ namespace BeastTuners.Migrations
 
                     b.HasIndex("PartID");
 
-                    b.ToTable("OrderDetail");
+                    b.ToTable("OrderDetail", (string)null);
 
                     b.HasData(
                         new
@@ -444,13 +414,13 @@ namespace BeastTuners.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("OrderResult");
+                    b.ToTable("OrderResult", (string)null);
 
                     b.HasData(
                         new
                         {
                             OrderID = 1,
-                            OrderDate = new DateTime(2025, 5, 17, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(5929),
+                            OrderDate = new DateTime(2025, 5, 3, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(2483),
                             Status = "Completed",
                             TotalAmount = 495.00m,
                             UserID = "user1"
@@ -458,7 +428,7 @@ namespace BeastTuners.Migrations
                         new
                         {
                             OrderID = 2,
-                            OrderDate = new DateTime(2025, 5, 18, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(5958),
+                            OrderDate = new DateTime(2025, 5, 4, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(2524),
                             Status = "Pending",
                             TotalAmount = 120.00m,
                             UserID = "user2"
@@ -466,7 +436,7 @@ namespace BeastTuners.Migrations
                         new
                         {
                             OrderID = 3,
-                            OrderDate = new DateTime(2025, 5, 19, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(5961),
+                            OrderDate = new DateTime(2025, 5, 5, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(2530),
                             Status = "Completed",
                             TotalAmount = 450.00m,
                             UserID = "user3"
@@ -474,7 +444,7 @@ namespace BeastTuners.Migrations
                         new
                         {
                             OrderID = 4,
-                            OrderDate = new DateTime(2025, 5, 20, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(5968),
+                            OrderDate = new DateTime(2025, 5, 6, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(2543),
                             Status = "Pending",
                             TotalAmount = 175.50m,
                             UserID = "user4"
@@ -482,7 +452,7 @@ namespace BeastTuners.Migrations
                         new
                         {
                             OrderID = 5,
-                            OrderDate = new DateTime(2025, 5, 21, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(5971),
+                            OrderDate = new DateTime(2025, 5, 7, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(2549),
                             Status = "Cancelled",
                             TotalAmount = 220.00m,
                             UserID = "user5"
@@ -523,7 +493,7 @@ namespace BeastTuners.Migrations
 
                     b.HasKey("PartID");
 
-                    b.ToTable("Part");
+                    b.ToTable("Part", (string)null);
 
                     b.HasData(
                         new
@@ -648,7 +618,7 @@ namespace BeastTuners.Migrations
 
                     b.HasIndex("SupplierID");
 
-                    b.ToTable("PartSupplier");
+                    b.ToTable("PartSupplier", (string)null);
 
                     b.HasData(
                         new
@@ -737,7 +707,7 @@ namespace BeastTuners.Migrations
 
                     b.HasKey("SupplierID");
 
-                    b.ToTable("Supplier");
+                    b.ToTable("Supplier", (string)null);
 
                     b.HasData(
                         new
@@ -800,76 +770,76 @@ namespace BeastTuners.Migrations
 
                     b.HasIndex("SupplierID");
 
-                    b.ToTable("SuppliersDelivery");
+                    b.ToTable("SuppliersDelivery", (string)null);
 
                     b.HasData(
                         new
                         {
                             SupplierDeliveryID = 1,
-                            DeliveryTime = new DateTime(2025, 5, 12, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(6315),
+                            DeliveryTime = new DateTime(2025, 4, 28, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(3245),
                             PartID = 1,
                             SupplierID = 1
                         },
                         new
                         {
                             SupplierDeliveryID = 2,
-                            DeliveryTime = new DateTime(2025, 5, 17, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(6319),
+                            DeliveryTime = new DateTime(2025, 5, 3, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(3258),
                             PartID = 2,
                             SupplierID = 2
                         },
                         new
                         {
                             SupplierDeliveryID = 3,
-                            DeliveryTime = new DateTime(2025, 5, 22, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(6322),
+                            DeliveryTime = new DateTime(2025, 5, 8, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(3263),
                             PartID = 3,
                             SupplierID = 3
                         },
                         new
                         {
                             SupplierDeliveryID = 4,
-                            DeliveryTime = new DateTime(2025, 5, 20, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(6325),
+                            DeliveryTime = new DateTime(2025, 5, 6, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(3267),
                             PartID = 4,
                             SupplierID = 4
                         },
                         new
                         {
                             SupplierDeliveryID = 5,
-                            DeliveryTime = new DateTime(2025, 5, 24, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(6327),
+                            DeliveryTime = new DateTime(2025, 5, 10, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(3272),
                             PartID = 5,
                             SupplierID = 5
                         },
                         new
                         {
                             SupplierDeliveryID = 6,
-                            DeliveryTime = new DateTime(2025, 5, 26, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(6358),
+                            DeliveryTime = new DateTime(2025, 5, 12, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(3304),
                             PartID = 2,
                             SupplierID = 1
                         },
                         new
                         {
                             SupplierDeliveryID = 7,
-                            DeliveryTime = new DateTime(2025, 5, 25, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(6361),
+                            DeliveryTime = new DateTime(2025, 5, 11, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(3309),
                             PartID = 3,
                             SupplierID = 2
                         },
                         new
                         {
                             SupplierDeliveryID = 8,
-                            DeliveryTime = new DateTime(2025, 5, 21, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(6364),
+                            DeliveryTime = new DateTime(2025, 5, 7, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(3317),
                             PartID = 4,
                             SupplierID = 3
                         },
                         new
                         {
                             SupplierDeliveryID = 9,
-                            DeliveryTime = new DateTime(2025, 5, 19, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(6366),
+                            DeliveryTime = new DateTime(2025, 5, 5, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(3321),
                             PartID = 5,
                             SupplierID = 4
                         },
                         new
                         {
                             SupplierDeliveryID = 10,
-                            DeliveryTime = new DateTime(2025, 5, 18, 18, 19, 31, 85, DateTimeKind.Local).AddTicks(6369),
+                            DeliveryTime = new DateTime(2025, 5, 4, 10, 33, 58, 809, DateTimeKind.Local).AddTicks(3326),
                             PartID = 1,
                             SupplierID = 5
                         });
@@ -1026,7 +996,7 @@ namespace BeastTuners.Migrations
             modelBuilder.Entity("BeastTuners.Models.OrderDetail", b =>
                 {
                     b.HasOne("BeastTuners.Models.OrderResult", "OrderResult")
-                        .WithMany("OrderDetails")
+                        .WithMany()
                         .HasForeignKey("OrderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1140,11 +1110,6 @@ namespace BeastTuners.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BeastTuners.Models.OrderResult", b =>
-                {
-                    b.Navigation("OrderDetails");
                 });
 
             modelBuilder.Entity("BeastTuners.Models.Part", b =>

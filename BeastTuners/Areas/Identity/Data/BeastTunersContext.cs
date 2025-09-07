@@ -113,7 +113,9 @@ public class BeastTunersContext : IdentityDbContext<BeastTunersUser>
             new Part { PartID = 7, PartName = "High Flow Exhaust", Category = "Exhaust", Price = 499.99m, StockQuantity = 10, Description = "Enhances engine performance and sound", ImagePath = "/images/Subi exhaust.jpg" },
             new Part { PartID = 8, PartName = "Bucket Racing Seats", Category = "Interior", Price = 750.00m, StockQuantity = 6, Description = "Lightweight and secure racing seats", ImagePath = "/images/Seats.jpg" },
             new Part { PartID = 9, PartName = "Touchscreen Dash Display", Category = "Interior", Price = 300.00m, StockQuantity = 12, Description = "Smart infotainment system for modern cars", ImagePath = "/images/Display.jpg" },
-            new Part { PartID = 10, PartName = "Slotted Rotors", Category = "Brakes", Price = 180.00m, StockQuantity = 25, Description = "Enhanced cooling and stopping power", ImagePath = "/images/Rotor.jpg" }
+            new Part { PartID = 10, PartName = "Slotted Rotors", Category = "Brakes", Price = 180.00m, StockQuantity = 25, Description = "Enhanced cooling and stopping power", ImagePath = "/images/Rotor.jpg" },
+            new Part { PartID = 11, PartName = "Twin Turbo", Category = "Engine", Price = 1800.00m, StockQuantity = 5, Description = "Enhanced speed and acceleration", ImagePath = "/images/TurboSubaru.jpg" },
+            new Part { PartID = 12, PartName = "Rear Spoiler", Category = "Exterior", Price = 800.00m, StockQuantity = 2, Description = "Light Weight and Areodynamic", ImagePath = "/images/TurboSubaru.jpg" }
         );
 
 
@@ -123,7 +125,11 @@ public class BeastTunersContext : IdentityDbContext<BeastTunersUser>
             new Supplier { SupplierID = 2, SupplierName = "GearCo", PhoneNumber = "0800456789", Address = "42 Mechanics Rd" },
             new Supplier { SupplierID = 3, SupplierName = "AutoZone Supplies", PhoneNumber = "0211112222", Address = "12 Industrial Rd" },
             new Supplier { SupplierID = 4, SupplierName = "SpeedParts NZ", PhoneNumber = "0213334444", Address = "88 Speedway Ave" },
-            new Supplier { SupplierID = 5, SupplierName = "MotorTech Ltd", PhoneNumber = "0215556666", Address = "5 Workshop Lane" }
+            new Supplier { SupplierID = 5, SupplierName = "MotorTech Ltd", PhoneNumber = "0215556666", Address = "5 Workshop Lane" },
+            new Supplier { SupplierID = 6, SupplierName = "Iroz", PhoneNumber = "0215556662", Address = "4 Adam Street" },
+            new Supplier { SupplierID = 7, SupplierName = "ECU Tunning", PhoneNumber = "0215556682", Address = "23 Grey Lane" },
+            new Supplier { SupplierID = 8, SupplierName = "Max Performance", PhoneNumber = "0215556882", Address = "73 Tri Rd" },
+            new Supplier { SupplierID = 9, SupplierName = "Jdm Hub", PhoneNumber = "0215556872", Address = "68 Osaka Rd" }
         );
 
         // --- Inventory Adjustments ---
@@ -132,7 +138,10 @@ public class BeastTunersContext : IdentityDbContext<BeastTunersUser>
      new InventoryAdjustment { AdjustmentID = 2, PartID = 2, AdjustmentType = "Damaged", Quantity = -3, AdjustmentDate = DateTime.Now.AddDays(-12), Reason = "Damaged in delivery" },
      new InventoryAdjustment { AdjustmentID = 3, PartID = 3, AdjustmentType = "Restock", Quantity = 10, AdjustmentDate = DateTime.Now.AddDays(-10), Reason = "Supplier delivery" },
      new InventoryAdjustment { AdjustmentID = 4, PartID = 4, AdjustmentType = "Manual Correction", Quantity = 5, AdjustmentDate = DateTime.Now.AddDays(-8), Reason = "Stock correction" },
-     new InventoryAdjustment { AdjustmentID = 5, PartID = 5, AdjustmentType = "Restock", Quantity = 12, AdjustmentDate = DateTime.Now.AddDays(-5), Reason = "New shipment" }
+     new InventoryAdjustment { AdjustmentID = 5, PartID = 5, AdjustmentType = "Restock", Quantity = 12, AdjustmentDate = DateTime.Now.AddDays(-5), Reason = "New shipment" },
+     new InventoryAdjustment { AdjustmentID = 6, PartID = 6, AdjustmentType = "Manual Correction", Quantity = 5, AdjustmentDate = DateTime.Now.AddDays(-8), Reason = "Stock correction" },
+     new InventoryAdjustment { AdjustmentID = 7, PartID = 7, AdjustmentType = "Restock", Quantity = 2, AdjustmentDate = DateTime.Now.AddDays(-10), Reason = "New shipment" },
+     new InventoryAdjustment { AdjustmentID = 8, PartID = 8, AdjustmentType = "Restock", Quantity = 5, AdjustmentDate = DateTime.Now.AddDays(-5), Reason = "Out of stock" }
  );
 
 
