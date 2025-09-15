@@ -28,5 +28,20 @@ namespace BeastTuners.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        [HttpPost]
+        public async Task<IActionResult> Subscribe(string email)
+        {
+            if (!string.IsNullOrEmpty(email) && email.Contains("@"))
+            {
+                // Here you would typically save to database or send to email service
+                TempData["SubscriptionSuccess"] = "Thank you for subscribing to our newsletter!";
+            }
+            else
+            {
+                TempData["SubscriptionError"] = "Please enter a valid email address.";
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

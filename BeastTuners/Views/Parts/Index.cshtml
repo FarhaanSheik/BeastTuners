@@ -7,7 +7,7 @@
 
 <h1>Parts Inventory</h1>
 
-<!-- 🔍 Search & Filter Form -->
+<!--Search & Filter Form -->
 <form asp-action="Index" method="get" class="mb-3">
     <div class="input-group">
         <input type="text" name="searchString" class="form-control" placeholder="Search by name..." value="@Context.Request.Query["searchString"]">
@@ -26,53 +26,7 @@
     </div>
 </form>
 
-<!-- ENGINE COMPARISON SLIDER (ONLY SHOWS FOR ENGINE CATEGORY) -->
-@if (currentCategory == "Engine")
-{
-    <div class="engine-comparison mb-5">
-        <!-- Increased container size and added background for better visibility -->
-        <div id="comparison-container" class="position-relative"
-             style="height: 500px; width: 800px; max-width: 100%; margin: 0 auto; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15); background: #f5f5f5;">
 
-            <!-- After Image - Higher resolution version -->
-            <div class="position-absolute w-100 h-100">
-                <img src="/images/NismoUpgraded.jpg.png"
-                     class="w-100 h-100 object-fit-cover"
-                     style="object-position: center;"
-                     alt="Upgraded Engine"
-                     onerror="this.src='https://via.placeholder.com/1600x1000?text=Upgraded+Engine+HD'">
-                <span class="position-absolute bottom-0 end-0 bg-dark text-white p-2 m-3 rounded">Performance Upgrade</span>
-            </div>
-
-            <!-- Before Image - Higher resolution version with clip-path -->
-            <div id="before-image" class="position-absolute h-100 w-100">
-                <img src="/images/NismoEngine.jpg"
-                     class="w-100 h-100 object-fit-cover"
-                     style="object-position: center;"
-                     alt="Stock Engine"
-                     onerror="this.src='https://via.placeholder.com/1600x1000?text=Stock+Engine+HD'">
-                <span class="position-absolute bottom-0 start-0 bg-dark text-white p-2 m-3 rounded">Stock Engine</span>
-            </div>
-
-            <!-- Slider Control Area -->
-            <div id="slider-control" class="position-absolute h-100 w-100" style="z-index: 10;">
-                <div id="divider" class="position-absolute h-100 bg-white"
-                     style="width: 4px; left: 50%; transform: translateX(-50%); box-shadow: 0 0 10px rgba(0,0,0,0.5);">
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                                    background: white; width: 40px; height: 40px; border-radius: 50%;
-                                    display: flex; align-items: center; justify-content: center;">
-                        ↔
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="text-center mt-3">
-            <p>Our performance upgrades increase horsepower by 30-50% while maintaining reliability.</p>
-            <a href="#" class="btn btn-primary">View Upgrade Packages</a>
-        </div>
-    </div>
-}
 
 @if (User.IsInRole("Employee") || User.IsInRole("Manager") || User.IsInRole("Staff") || User.IsInRole("Receptionist"))
 {
@@ -137,88 +91,3 @@
     </div>
 }
 
-<!-- JavaScript for the slider -->
-@section Scripts {
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const container = document.getElementById('comparison-container');
-            const beforeImage = document.getElementById('before-image');
-            const divider = document.getElementById('divider');
-            const sliderControl = document.getElementById('slider-control');
-
-            let isDragging = false;
-
-            // Update slider position
-            function updateSlider(position) {
-                const percent = Math.min(100, Math.max(0, position));
-                beforeImage.style.clipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0 100%)`;
-                divider.style.left = `${percent}%`;
-            }
-
-            // Mouse enter/leave events
-            sliderControl.addEventListener('mouseenter', function() {
-                sliderControl.style.cursor = 'ew-resize';
-            });
-
-            sliderControl.addEventListener('mouseleave', function() {
-                sliderControl.style.cursor = 'default';
-                isDragging = false;
-            });
-
-            // Mouse move events
-            sliderControl.addEventListener('mousemove', function(e) {
-                if (!isDragging) return;
-
-                const rect = container.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const percent = (x / rect.width) * 100;
-
-                updateSlider(percent);
-            });
-
-            // Mouse down/up events
-            sliderControl.addEventListener('mousedown', function(e) {
-                isDragging = true;
-                const rect = container.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const percent = (x / rect.width) * 100;
-
-                updateSlider(percent);
-            });
-
-            document.addEventListener('mouseup', function() {
-                isDragging = false;
-            });
-
-            // Touch support
-            sliderControl.addEventListener('touchstart', function(e) {
-                isDragging = true;
-                const rect = container.getBoundingClientRect();
-                const x = e.touches[0].clientX - rect.left;
-                const percent = (x / rect.width) * 100;
-
-                updateSlider(percent);
-                e.preventDefault();
-            });
-
-            sliderControl.addEventListener('touchmove', function(e) {
-                if (!isDragging) return;
-
-                const rect = container.getBoundingClientRect();
-                const x = e.touches[0].clientX - rect.left;
-                const percent = (x / rect.width) * 100;
-
-                updateSlider(percent);
-                e.preventDefault();
-            });
-
-            sliderControl.addEventListener('touchend', function() {
-                isDragging = false;
-            });
-
-            // Initialize
-            updateSlider(50);
-        });
-    </script>
-}
-}

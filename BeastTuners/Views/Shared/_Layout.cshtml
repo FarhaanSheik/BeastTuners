@@ -11,71 +11,280 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BeastTuners.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Top Announcement Bar -->
+    <div class="announcement-bar">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <i class="fas fa-truck-fast me-2"></i>FREE Shipping on orders over $2,000
+                </div>
+                <div>
+                    <i class="fas fa-phone me-2"></i>Contact: (0800) 123-4567
+                </div>
+            </div>
+        </div>
+    </div>
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BeastTuners</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-car me-2"></i>
+                    <span class="brand-text">BEAST TUNERS</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home me-1"></i>Home
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Parts" asp-action="Index">
+                                <i class="fas fa-cogs me-1"></i>Parts Shop
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Parts" asp-action="Index">Parts</a>
-                        </li>
-                      
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="OrderResults" asp-action="Index">Order</a>
+                            <a class="nav-link" asp-area="" asp-controller="OrderResults" asp-action="Index">
+                                <i class="fas fa-receipt me-1"></i>My Orders
+                            </a>
                         </li>
 
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Employee"))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="InventoryAdjustments" asp-action="Index">InventoryAdjustments</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Suppliers" asp-action="Index">Suppliers</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="PartSuppliers" asp-action="Index">PartSuppliers</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="SuppliersDeliveries" asp-action="Index">SuppliersDeliveries</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="inventoryDropdown" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-warehouse me-1"></i>Inventory
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-controller="InventoryAdjustments" asp-action="Index">Adjustments</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Suppliers" asp-action="Index">Suppliers</a></li>
+                                    <li><a class="dropdown-item" asp-controller="PartSuppliers" asp-action="Index">Part Suppliers</a></li>
+                                    <li><a class="dropdown-item" asp-controller="SuppliersDeliveries" asp-action="Index">Deliveries</a></li>
+                                </ul>
                             </li>
                         }
 
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Parts" asp-action="Cart">🛒 View Cart</a>
+                            <a class="nav-link cart-link" asp-controller="Parts" asp-action="Cart">
+                                <i class="fas fa-shopping-cart me-1"></i>
+                                <span class="cart-count"> Cart</span>
+                            </a>
                         </li>
                     </ul>
+
+                    <partial name="_LoginPartial" />
                 </div>
-                <partial name="_LoginPartial" />
-            </div>
+            </div>  
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+
+    <div class="container-fluid px-0">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-5 pb-3">
         <div class="container">
-            &copy; 2025 - BeastTuners - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-brand">
+                        <i class="fas fa-car me-2"></i>BEAST TUNERS
+                    </h5>
+                    <p class="text-muted">Premium Automotive Parts & Performance Solutions</p>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h6>SHOP</h6>
+                    <ul class="list-unstyled">
+                        <li><a asp-controller="Parts" asp-action="Index" asp-route-categoryFilter="Engine" class="text-muted">Engine Parts</a></li>
+                        <li><a asp-controller="Parts" asp-action="Index" asp-route-categoryFilter="Brakes" class="text-muted">Brakes</a></li>
+                        <li><a asp-controller="Parts" asp-action="Index" asp-route-categoryFilter="Wheels" class="text-muted">Wheels</a></li>
+                        <li><a asp-controller="Parts" asp-action="Index" asp-route-categoryFilter="Suspension" class="text-muted">Suspension</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h6>SUPPORT</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="mailto:support@beasttuners.com" class="text-muted">Contact Us</a></li>
+                        <li><a href="#" class="text-muted">Shipping Info</a></li>
+                        <li><a href="#" class="text-muted">Returns</a></li>
+                        <li><a href="#" class="text-muted">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h6>NEWSLETTER</h6>
+                    <p class="text-muted">Subscribe for exclusive deals and new products</p>
+                    <form action="/Home/Subscribe" method="post">
+                        <div class="input-group">
+                            <input type="email" name="email" class="form-control" placeholder="Your email" required>
+                            <button type="submit" class="btn btn-danger">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="text-muted mb-0">&copy; 2025 BeastTuners. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a asp-controller="Home" asp-action="Privacy" class="text-muted me-3">Privacy Policy</a>
+                    <a href="#" class="text-muted me-3">Terms of Service</a>
+                    <a href="#" class="text-muted">Cookie Policy</a>
+                </div>
+            </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <style>
+        :root {
+            --primary-color: #dc3545;
+            --secondary-color: #2c3e50;
+            --accent-color: #ffc107;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+        }
+
+            .navbar-nav .nav-link:hover {
+                color: var(--primary-color) !important;
+            }
+
+        .navbar-nav .btn-link {
+            color: white !important;
+        }
+
+        .announcement-bar {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .navbar-brand {
+            font-family: 'Racing Sans One', cursive;
+            font-size: 1.8rem;
+            color: var(--primary-color) !important;
+        }
+
+        .brand-text {
+            background: linear-gradient(45deg, #dc3545, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,.3);
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 0 5px;
+            border-radius: 5px;
+        }
+
+            .navbar-nav .nav-link:hover {
+                background: rgba(220, 53, 69, 0.1);
+                transform: translateY(-2px);
+            }
+
+        .cart-link {
+            background: var(--primary-color);
+            border-radius: 25px;
+            padding: 8px 15px !important;
+            margin-left: 10px !important;
+        }
+
+            .cart-link:hover {
+                background: #c82333 !important;
+                transform: scale(1.05);
+            }
+
+        .dropdown-menu {
+            background: #2c3e50;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .dropdown-item {
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+            .dropdown-item:hover {
+                background: var(--primary-color);
+                color: white;
+            }
+
+        footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            margin-top: auto;
+        }
+
+        .footer-brand {
+            font-family: 'Racing Sans One', cursive;
+            color: var(--primary-color);
+        }
+
+        .social-links a {
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+            .social-links a:hover {
+                color: var(--primary-color) !important;
+                transform: translateY(-3px);
+            }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #dc3545, #ff6b6b);
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+            .btn-danger:hover {
+                background: linear-gradient(45deg, #c82333, #e53935);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+            }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.4rem;
+            }
+
+            .announcement-bar .d-flex {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
