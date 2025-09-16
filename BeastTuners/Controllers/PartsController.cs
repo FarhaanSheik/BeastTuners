@@ -1,35 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using BeastTuners.Areas.Identity.Data;
 using BeastTuners.Data;
 using BeastTuners.Models;
 using Microsoft.AspNetCore.Authorization;
-
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace BeastTuners.Controllers
 {
-   
     public class PartsController : Controller
     {
         private readonly BeastTunersContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly CartService _cartService;
+        private readonly UserManager<BeastTunersUser> _userManager;
 
-        public PartsController(BeastTunersContext context, IWebHostEnvironment webHostEnvironment, CartService cartService)
+        public PartsController(BeastTunersContext context, IWebHostEnvironment webHostEnvironment, CartService cartService, UserManager<BeastTunersUser> userManager)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
             _cartService = cartService;
+            _userManager = userManager;
         }
 
-     
+        // GET: Parts
         public async Task<IActionResult> Index(string searchString, string categoryFilter)
         {
             var parts = _context.Part.AsQueryable();
@@ -67,6 +70,7 @@ namespace BeastTuners.Controllers
             return View(parts);
         }
 
+        // GET: Parts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -83,12 +87,15 @@ namespace BeastTuners.Controllers
 
             return View(part);
         }
+
+        // GET: Parts/Create
         [Authorize(Roles = "Employee")]
         public IActionResult Create()
         {
             return View();
         }
 
+        // POST: Parts/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employee")]
@@ -117,6 +124,7 @@ namespace BeastTuners.Controllers
             return View(part);
         }
 
+        // GET: Parts/Edit/5
         [Authorize(Roles = "Employee")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -133,6 +141,7 @@ namespace BeastTuners.Controllers
             return View(part);
         }
 
+        // POST: Parts/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employee")]
@@ -179,6 +188,8 @@ namespace BeastTuners.Controllers
             }
             return View(part);
         }
+
+        // GET: Parts/Delete/5
         [Authorize(Roles = "Employee")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -197,6 +208,7 @@ namespace BeastTuners.Controllers
             return View(part);
         }
 
+        // POST: Parts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employee")]
@@ -217,7 +229,7 @@ namespace BeastTuners.Controllers
             return _context.Part.Any(e => e.PartID == id);
         }
 
-        // Updated AddToCart Method
+        // Cart Functionality
         [HttpPost]
         public IActionResult AddToCart(int id, int quantity = 1, string returnUrl = null)
         {
@@ -229,7 +241,7 @@ namespace BeastTuners.Controllers
                 PartID = part.PartID,
                 PartName = part.PartName,
                 Price = part.Price,
-                Quantity = quantity,  
+                Quantity = quantity,
                 ImagePath = part.ImagePath
             };
 
@@ -271,6 +283,152 @@ namespace BeastTuners.Controllers
             }
 
             return RedirectToAction("Cart");
+        }
+
+        // Checkout Functionality
+        [Authorize]
+        public async Task<IActionResult> Checkout()
+        {
+            var cartItems = _cartService.GetCart();
+
+            if (!cartItems.Any())
+            {
+                return RedirectToAction("Cart");
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+
+            var model = new CheckoutViewModel
+            {
+                FirstName = user?.FirstName,
+                LastName = user?.LastName,
+                Email = user?.Email,
+                Phone = user?.PhoneNumber,
+                Address = user?.Address,
+                CartItems = cartItems,
+                Subtotal = cartItems.Sum(item => item.Price * item.Quantity),
+                Shipping = 15.00m,
+                Tax = 0.15m
+            };
+
+            model.Tax = model.Subtotal * model.Tax;
+            model.Total = model.Subtotal + model.Shipping + model.Tax;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Checkout(CheckoutViewModel model)
+        {
+            var cartItems = _cartService.GetCart();
+
+            if (!cartItems.Any())
+            {
+                return RedirectToAction("Cart");
+            }
+
+            // Recalculate totals in case of form manipulation
+            model.Subtotal = cartItems.Sum(item => item.Price * item.Quantity);
+            model.Shipping = 15.00m;
+            model.Tax = model.Subtotal * 0.15m;
+            model.Total = model.Subtotal + model.Shipping + model.Tax;
+            model.CartItems = cartItems;
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+
+            // Create order
+            var order = new OrderResult
+            {
+                UserID = user.Id,
+                OrderDate = DateTime.Now,
+                TotalAmount = model.Total,
+                Status = "Processing",
+                
+            };
+
+            // Add order items and update stock
+            foreach (var cartItem in cartItems)
+            {
+                order.OrderDetails.Add(new OrderDetail
+                {
+                    PartID = cartItem.PartID,
+                    Quantity = cartItem.Quantity,
+                    UnitPrice = cartItem.Price
+                });
+                 
+                // Update stock quantity
+                var part = await _context.Part.FindAsync(cartItem.PartID);
+                if (part != null)
+                {
+                    part.StockQuantity -= cartItem.Quantity;
+                    if (part.StockQuantity < 0) part.StockQuantity = 0;
+                    _context.Part.Update(part);
+                }
+            }
+
+            _context.OrderResult.Add(order);
+
+            // Clear cart
+            _cartService.ClearCart();
+
+            await _context.SaveChangesAsync();
+            TempData["OrderSuccess"] = $"Order #{order.OrderID} placed successfully! This is a demo environment - no actual payment was processed.";
+            return RedirectToAction("OrderConfirmation", new { id = order.OrderID });
+        
+        }
+
+        [Authorize]
+        public async Task<IActionResult> OrderConfirmation(int id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var order = await _context.OrderResult
+                .Include(o => o.OrderDetails)
+                .ThenInclude(oi => oi.Part)
+                .FirstOrDefaultAsync(o => o.OrderID == id && o.UserID == user.Id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
+
+        // Order History
+        [Authorize]
+        public async Task<IActionResult> OrderHistory()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var orders = await _context.OrderResult
+                .Where(o => o.UserID == user.Id)
+                .OrderByDescending(o => o.OrderDate)
+                .ToListAsync();
+
+            return View(orders);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> OrderDetails(int id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var order = await _context.OrderResult
+                .Include(o => o.OrderDetails)
+                .ThenInclude(oi => oi.Part)
+                .FirstOrDefaultAsync(o => o.OrderID == id && o.UserID == user.Id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using BeastTuners.Areas.Identity.Data;
+using System.Collections.Generic;
 
 namespace BeastTuners.Models
 {
@@ -25,6 +26,12 @@ namespace BeastTuners.Models
         public string Status { get; set; } // e.g., "Pending", "Completed", "Cancelled"
 
         public BeastTunersUser User { get; set; }
+
+        // Initialize the collection in constructor
+        public OrderResult()
+        {
+            OrderDetails = new List<OrderDetail>();
+        }
 
         public ICollection<OrderDetail> OrderDetails { get; set; }
     }

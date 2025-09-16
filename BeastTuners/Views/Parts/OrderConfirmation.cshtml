@@ -1,0 +1,100 @@
+﻿@model BeastTuners.Models.OrderResult
+
+@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-success text-white text-center">
+                    <h2 class="mb-0"><i class="fas fa-check-circle me-2"></i>Order Confirmed!</h2>
+                </div>
+                <div class="card-body text-center">
+                    <!-- Demo Environment Banner -->
+                    <div class="alert alert-warning mb-4">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Demo Environment:</strong> This is a demonstration. No actual payment was processed.
+                    </div>
+
+                    <div class="mb-4">
+                        <i class="fas fa-truck fa-4x text-success mb-3"></i>
+                        <h3>Thank You for Your Order!</h3>
+                        <p class="text-muted">Your order has been received and is being processed.</p>
+                    </div>
+
+                    <div class="order-details mb-4">
+                        <h4>Order #@Model.OrderID</h4>
+                        <p class="text-muted">Placed on @Model.OrderDate.ToString("f")</p>
+                        <p class="text-muted">Status: <span class="badge bg-info">@Model.Status</span></p>
+
+                        <h5 class="mt-4">Order Total</h5>
+                        <h3 class="text-danger">@Model.TotalAmount.ToString("C")</h3>
+                    </div>
+
+                    @if (Model.OrderDetails != null && Model.OrderDetails.Any())
+                    {
+                        <div class="order-items mb-4">
+                            <h5>Order Items</h5>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.OrderDetails)
+                                        {
+                                            <tr>
+                                                <td>@(item.Part?.PartName ?? "Product")</td>
+                                                <td>@item.Quantity</td>
+                                                <td>@item.UnitPrice.ToString("C")</td>
+                                                <td>@((item.UnitPrice * item.Quantity).ToString("C"))</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a asp-controller="Parts" asp-action="Index" class="btn btn-primary me-md-2">
+                            <i class="fas fa-shopping-cart me-2"></i>Continue Shopping
+                        </a>
+                        <a asp-controller="Parts" asp-action="OrderHistory" class="btn btn-outline-dark">
+                            <i class="fas fa-list me-2"></i>View Order History
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border: none;
+        border-radius: 15px;
+    }
+
+    .card-header {
+        border-radius: 15px 15px 0 0 !important;
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+    }
+
+    .badge {
+        font-size: 0.9em;
+    }
+
+    .alert-warning {
+        background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+        border: 1px solid #ffeaa7;
+        color: #856404;
+    }
+</style>
